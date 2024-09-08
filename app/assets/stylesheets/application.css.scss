@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+* {
+  font-family: sans-serif;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#logo {
+  font-style: italic;
+  margin: 0 0 0.5em;
+
+  span {
+    font-size: 18pt;
+    font-weight: 900;
+  }
+}
+
+#navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: solid;
+  margin-bottom: 1em;
+}
+
+.sidebar {
+  float: right;
+  width: 33vw;
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 0 1em;
+  margin: 0 0 1em 1em;
+}
+
+/* #content {
+} */
+
+#footer {
+  margin: 0 auto;
+  padding: 1em;
+  background-color: white;
+  text-align: center;
+}
+
+#disclaimer {
+  border: 0.5px solid;
+  margin: 0 auto;
+  padding: 5px;
+  font-size: x-small;
+  font-style: italic;
+}
+
+.top {
+  font-size: small;
+  font-style: italic;
+}
+
+@media screen and (max-width: 600px) {
+
+  .sidebar {
+    width: auto;
+    margin: unset;
+    margin-bottom: 1em;
+  }
+
+}
