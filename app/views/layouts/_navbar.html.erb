@@ -1,7 +1,9 @@
 <a name="top" id="logo"><span>Psychedelic Hypnosis</span><br />of New York City</a>
 
-<% unless request.fullpath.match?( 'login' ) %>
-    <div id="login-status">
+<div id="login-status">
+    <%= link_to "Home", home_path unless request.fullpath == home_path %>
+    <%= " | " unless request.fullpath.match?( 'login' ) || request.fullpath == home_path %>
+    <% unless request.fullpath.match?( 'login' ) %>
         <% if logged_in? %>
             <%= "Logged in as #{ current_user.username }" %>
         <% else %>
@@ -11,5 +13,5 @@
         <%= link_to "My profile", user_path( current_user ) if logged_in? %>
         <%= " | " if logged_in? %>
         <%= link_to "Log out", logout_path, method: "delete", data: { confirm: "Confirm logout" } if logged_in? %>
-    </div>
-<% end %>
+    <% end %>
+</div>

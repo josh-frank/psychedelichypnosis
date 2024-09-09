@@ -1,9 +1,14 @@
 <h2>Welcome, <%= @user.username %></h2>
-<div style='font-style:italic;'><%= @affirmation %></div>
+<p style='font-style:italic;'><%= @affirmation %></p>
 
-<h3>Recent events</h3>
-<ul>
-  <% @user.user_events.last( 5 ).each do | event | %>
-    <li><%= "You #{ event.description } on #{ event.created_at.in_time_zone("America/New_York").strftime( '%B %d, %Y at %H:%M:%S' ) }" %></li>
-  <% end %>
-</ul>
+<div class='recent-events'>
+  <h3>Recent events</h3>
+  <ul>
+    <% @user.user_events.last( 5 ).reverse.each do | event | %>
+      <% event_datetime = event.created_at.in_time_zone( 'America/New_York' ) %>
+      <li>
+        You <b><%= event.description %></b> on <%= "#{ event_datetime.strftime( '%B %-d, %Y' ) } at #{ event_datetime.strftime( '%l:%M%P' ).strip }" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

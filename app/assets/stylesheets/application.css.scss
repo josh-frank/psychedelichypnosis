@@ -43,6 +43,7 @@
 }
 
 .sidebar {
+  display: block;
   float: right;
   width: 33vw;
   background-color: #ddd;
@@ -78,11 +79,34 @@ ol li {
   padding-bottom: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+.recent-events {
+  display: block;
+  float: right;
+  width: 15vw;
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 0 1em;
+  margin: 0 0 1em 1em;
+  font-size: 9pt;
+  font-style: italic;
+}
 
-  .sidebar {
+@media screen and ( max-width: 800px ) {
+
+  #navbar {
+    flex-flow: column nowrap;
+  }
+
+  #login-status {
+    margin-bottom: 1em;
+  }
+
+  .sidebar, .recent-events {
+    display: block;
+    float: unset;
     width: auto;
-    margin: unset;
+    padding: 1em;
+    margin: 0 auto;
     margin-bottom: 1em;
   }
 
