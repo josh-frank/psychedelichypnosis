@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
         @user = User.find_by( username: params[ :username ] )
         if @user && @user.authenticate( params[ :password ] )
             session[ :id ] = @user.id
+            UserEvent.create( user: @user, description: 'logged in' )
             redirect_to user_path( @user )
         else
-            flash[ :messages ] = [ "Invalid username or password!" ]
+            flash[ :messages ] = [ 'Invalid username or password!' ]
             redirect_to login_path
         end
     end

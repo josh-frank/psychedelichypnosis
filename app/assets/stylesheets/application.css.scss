@@ -74,6 +74,10 @@
   font-style: italic;
 }
 
+ol li {
+  padding-bottom: 1rem;
+}
+
 @media screen and (max-width: 600px) {
 
   .sidebar {

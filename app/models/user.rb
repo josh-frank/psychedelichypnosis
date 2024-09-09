@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :username, presence: true, uniqueness: true
 
+  has_many :user_events
   has_many :hypnotists, foreign_key: :hypnotist_id , class_name: "Appointment"
   has_many :clients, foreign_key: :client_id , class_name: "Appointment"
 
