@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_09_012005) do
+ActiveRecord::Schema.define(version: 2024_09_09_225700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2024_09_09_012005) do
     t.index ["hypnotist_id"], name: "index_appointments_on_hypnotist_id"
   end
 
+  create_table "release_signatures", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "e_signature", null: false
+    t.date "date", null: false
+    t.string "release_version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_release_signatures_on_user_id"
+  end
+
   create_table "user_events", force: :cascade do |t|
     t.bigint "user_id"
     t.string "description"
@@ -38,6 +48,8 @@ ActiveRecord::Schema.define(version: 2024_09_09_012005) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
     t.string "phone"
     t.string "email"
     t.integer "user_type", default: 0
@@ -47,5 +59,6 @@ ActiveRecord::Schema.define(version: 2024_09_09_012005) do
 
   add_foreign_key "appointments", "users", column: "client_id"
   add_foreign_key "appointments", "users", column: "hypnotist_id"
+  add_foreign_key "release_signatures", "users"
   add_foreign_key "user_events", "users"
 end

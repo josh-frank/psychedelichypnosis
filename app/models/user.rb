@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   has_many :user_events
+  has_many :release_signatures
   has_many :hypnotists, foreign_key: :hypnotist_id , class_name: "Appointment"
   has_many :clients, foreign_key: :client_id , class_name: "Appointment"
 

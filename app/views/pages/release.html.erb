@@ -1,6 +1,8 @@
+<%= render 'layouts/flash_messages' %>
+
 <h1>Release of Liability</h1>
 
-<p style="padding:5px;font-weight:bold;color:white;background-color:#c00">This page is a waiver and release of liability. It constitutes a legally binding agreement that outlines your responsibilities and governs your actions and behavior. You must carefully read this page and sign before scheduling a hypnosis session!</p>
+<p class='warning'>This page is a waiver and release of liability. It constitutes a legally binding agreement that outlines your responsibilities and governs your actions and behavior. You must carefully read this page and sign before scheduling hypnosis!</p>
 
 <p>In consideration of my acceptance as a client and subject of hypnosis, I hereby take the following actions and make the following declarations for myself, my executors, administrators, heirs, next of kin, successors, and assigns:</p>
 
@@ -21,3 +23,12 @@
 </ol>
 
 <p><b>I certify that I have read this document, fully understand its content and agree to its terms. I am aware that this document is a release of liability and a contract, and I sign it of my own free will.</b></p>
+
+<%= form_with scope: :release_signature, url: sign_release_path, method: 'post' do | f | %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :e_signature, 'E-Signature - Type your full name:' %>
+  <%= f.text_field :e_signature, name: 'release_signature[e_signature]' %>
+  <%= f.label :date %>
+  <%= f.date_field :date, name: 'release_signature[date]', placeholder: Date.today %>
+  <%= f.submit %>
+<% end %>

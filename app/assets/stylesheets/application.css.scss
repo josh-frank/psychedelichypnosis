@@ -79,6 +79,10 @@ ol li {
   padding-bottom: 1rem;
 }
 
+h1 {
+  white-space: nowrap;
+}
+
 .recent-events {
   display: block;
   float: right;
@@ -89,6 +93,21 @@ ol li {
   margin: 0 0 1em 1em;
   font-size: 9pt;
   font-style: italic;
+}
+
+.user-header {
+  font-size: 18pt;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.warning {
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  background-color: #c00;
+  width: auto;
+  display: inline-block;
 }
 
 @media screen and ( max-width: 800px ) {

@@ -1,10 +1,4 @@
-<% if flash[ :messages ] %>
-    <ul>
-    <% flash[ :messages ].each do | error_message | %>
-        <li style="color:red;"><%= error_message %></li>
-    <% end %>
-    </ul>
-<% end %>
+<%= render 'layouts/flash_messages' %>
 
 <div class="input-group">
     <%= form_tag "/login", method: "post" do %>

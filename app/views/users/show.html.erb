@@ -1,8 +1,12 @@
-<h2>Welcome, <%= @user.username %></h2>
-<p style='font-style:italic;'><%= @affirmation %></p>
+<% render 'layouts/flash_messages' %>
 
-<div class='recent-events'>
-  <h3>Recent events</h3>
+<section>
+  <h3 class='user-header'>Welcome, <%= @user.first_name %>.</h3>
+  <span style='font-style:italic;'><%= @affirmation %></span>
+</section>
+
+<section class='recent-events'>
+  <h3 class='user-header'>Recent events</h3>
   <ul>
     <% @user.user_events.last( 5 ).reverse.each do | event | %>
       <% event_datetime = event.created_at.in_time_zone( 'America/New_York' ) %>
@@ -11,4 +15,20 @@
       </li>
     <% end %>
   </ul>
-</div>
+</section>
+
+<section>
+  <h3 class='user-header'>Credits</h3>
+  <% if true %>
+    <span>You have no credits. Contact your hypnotist for credits.</span>
+  <% end %>
+</section>
+
+<section>
+  <h3 class='user-header'>Appointments</h3>
+  <ul>
+  <% if @user.release_signatures.empty? %>
+    <li class='warning'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
+  <% end %>
+  </ul>
+</section>
