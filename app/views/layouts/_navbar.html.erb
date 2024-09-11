@@ -7,7 +7,7 @@
         <% if logged_in? %>
             <%= "Logged in as #{ current_user.username }" %>
         <% else %>
-            <%= link_to "Client login", login_path %>
+            <%= link_to "Client login", client_login_form_path %>
         <% end %>
         <%= " | " if logged_in? %>
         <%= link_to "My profile", client_path( current_user ) if logged_in? %>

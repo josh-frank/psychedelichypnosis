@@ -7,5 +7,7 @@ class Client < ApplicationRecord
   has_many :release_signatures
   has_many :appointments
   has_many :hypnotists, through: :appointments
+  has_many :credits
+  has_many :hypnotists, through: :credits
 
 end

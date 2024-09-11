@@ -19,8 +19,12 @@
 
 <section>
   <h3 class='user-header'>Credits</h3>
-  <% if true %>
+  <% if @client.credits.empty? %>
     <span>You have no credits. Contact your hypnotist for credits.</span>
+  <% else %>
+      <% @client.credits.each do | credit | %>
+        <li>You purchased <b><%= "#{ credit.value } credit#{ credit.value > 1 ? 's' : '' }" %></b> on <%= credit.date.strftime( '%B %-d, %Y' ) %>. <%= link_to 'View invoice', invoice_path( credit.id ) %></li>
+      <% end %>
   <% end %>
 </section>
 
