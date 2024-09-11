@@ -1,2 +1,0 @@
-module ReleaseSignaturesHelper
-end

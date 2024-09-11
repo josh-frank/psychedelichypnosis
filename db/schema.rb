@@ -26,39 +26,47 @@ ActiveRecord::Schema.define(version: 2024_09_09_225700) do
     t.index ["hypnotist_id"], name: "index_appointments_on_hypnotist_id"
   end
 
-  create_table "release_signatures", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "e_signature", null: false
-    t.date "date", null: false
-    t.string "release_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_release_signatures_on_user_id"
-  end
-
-  create_table "user_events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "description"
-    t.string "ip_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_events_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "username"
+  create_table "clients", force: :cascade do |t|
+    t.string "username", null: false
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
     t.string "phone"
     t.string "email"
-    t.integer "user_type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "appointments", "users", column: "client_id"
-  add_foreign_key "appointments", "users", column: "hypnotist_id"
-  add_foreign_key "release_signatures", "users"
-  add_foreign_key "user_events", "users"
+  create_table "hypnotists", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "release_signatures", force: :cascade do |t|
+    t.bigint "client_id"
+    t.string "e_signature", null: false
+    t.date "date", null: false
+    t.string "release_version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_release_signatures_on_client_id"
+  end
+
+  create_table "user_events", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "hypnotist_id"
+    t.string "description"
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_user_events_on_client_id"
+    t.index ["hypnotist_id"], name: "index_user_events_on_hypnotist_id"
+  end
+
 end

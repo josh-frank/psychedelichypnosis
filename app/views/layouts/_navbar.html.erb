@@ -10,8 +10,8 @@
             <%= link_to "Client login", login_path %>
         <% end %>
         <%= " | " if logged_in? %>
-        <%= link_to "My profile", user_path( current_user ) if logged_in? %>
+        <%= link_to "My profile", client_path( current_user ) if logged_in? %>
         <%= " | " if logged_in? %>
-        <%= link_to "Log out", logout_path, method: "delete", data: { confirm: "Confirm logout" } if logged_in? %>
+        <%= link_to "Log out", logout_path, method: "delete", data: { confirm: "Are you sure you want to log out?" } if logged_in? %>
     <% end %>
 </div>

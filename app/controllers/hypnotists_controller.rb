@@ -1,0 +1,2 @@
+class HypnotistsController < ApplicationController
+end

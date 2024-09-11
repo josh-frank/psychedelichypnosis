@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login_form', as: 'login_form'
   post '/login', to: 'sessions#login'
   delete '/', to: 'sessions#logout', as: 'logout'
-  
-  ##Users
-  get '/users/:id', to: 'users#show', as: 'user'
+
+  ##Clients
+  get '/clients/:id', to: 'clients#show', as: 'client'
 
   ##Release form
   get '/release_form', to: 'pages#release', as: 'release_form'
