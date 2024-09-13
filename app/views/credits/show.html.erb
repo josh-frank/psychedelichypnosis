@@ -1,0 +1,34 @@
+<% render 'layouts/flash_messages' %>
+
+<div style="text-align:center;">
+
+  <h3><%= "Invoice ##{ @credit.id }" %></h3>
+
+  <p><b>Client:</b> <%= "#{ @credit.client.full_name } • #{ @credit.client.phone } • #{ @credit.client.email }" %></p>
+  
+</div>
+
+<table class="invoice-table">
+  <thead><tr>
+    <td>Product</td>
+    <td>Cost</td>
+    <td>Sold by</td>
+    <td>Paid on</td>
+  </tr></thead>
+  
+  <tbody>
+    <tr>
+      <td>Credit for <%= @credit.value %> hypnosis sessions</td>
+      <td><%= number_to_currency( @credit.paid ) %></td>
+      <td><%= @credit.hypnotist.first_name %></td>
+      <td><%= @credit.date %></td>
+    </tr>
+    <tr class="invoice-total"><strong>
+      <td>TOTAL:</td>
+      <td><%= number_to_currency( @credit.paid ) %></td>
+    </strong></tr>
+  </tbody>
+
+</table>
+
+<strong style="text-align:center">Thank you for your business! It is my privilege to serve you!</strong>

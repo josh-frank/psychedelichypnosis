@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   ##Credits
   get '/invoice/:id', to: 'credits#show', as: 'invoice'
 
+  ##Appointments
+  get '/appointments/new', to: 'appointments#new', as: 'new_appointment'
+  post '/appointments', to: 'appointments#create'
+
 end

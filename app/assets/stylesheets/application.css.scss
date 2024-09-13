@@ -27,9 +27,8 @@
   font-style: italic;
   margin: 0 0 0.5em;
 
-  span {
+  strong {
     font-size: 18pt;
-    font-weight: 900;
   }
 }
 
@@ -66,7 +65,7 @@
   border: 0.5px solid;
   margin: 0 auto;
   padding: 5px;
-  font-size: x-small;
+  font-size: 11px;
   font-style: italic;
 }
 
@@ -79,9 +78,9 @@ ol li {
   padding-bottom: 1rem;
 }
 
-h1 {
-  white-space: nowrap;
-}
+// h1 {
+//   white-space: nowrap;
+// }
 
 .recent-events {
   display: block;
@@ -97,8 +96,14 @@ h1 {
 
 .user-header {
   font-size: 18pt;
-  font-weight: bold;
   margin-bottom: 1em;
+}
+
+.big-button {
+  display: block;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 14pt;
 }
 
 .warning {
@@ -108,6 +113,11 @@ h1 {
   background-color: #c00;
   width: auto;
   display: inline-block;
+}
+
+.sign-release-form {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 @media screen and ( max-width: 800px ) {

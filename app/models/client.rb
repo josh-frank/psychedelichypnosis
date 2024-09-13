@@ -10,4 +10,12 @@ class Client < ApplicationRecord
   has_many :credits
   has_many :hypnotists, through: :credits
 
+  def full_name
+    "#{ self.first_name } #{ self.last_name }"
+  end
+
+  def balance
+    self.credits.sum( :value ) - self.appointments.size
+  end
+
 end

@@ -1,0 +1,16 @@
+.invoice-table {
+  margin: 0 auto;
+}
+
+.invoice-table thead {
+  background-color: #ddd;
+  font-style: italic;
+}
+
+.invoice-table td {
+  padding: 1rem;
+}
+
+.invoice-total td:nth-child( 1 ) {
+  text-align: right;
+}

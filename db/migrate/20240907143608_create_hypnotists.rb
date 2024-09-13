@@ -7,6 +7,7 @@ class CreateHypnotists < ActiveRecord::Migration[5.2]
       t.string :last_name
       t.string :phone
       t.string :email
+      t.text :availability
 
       t.timestamps
     end

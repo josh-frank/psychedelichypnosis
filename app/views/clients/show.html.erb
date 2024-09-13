@@ -1,12 +1,12 @@
 <% render 'layouts/flash_messages' %>
 
 <section>
-  <h3 class='user-header'>Welcome, <%= @client.first_name %>.</h3>
-  <span style='font-style:italic;'><%= @affirmation %></span>
+  <h1 class='user-header'>Welcome, <%= @client.first_name %>.</h1>
+  <ul style='font-style:italic;'><%= @affirmation %></ul>
 </section>
 
 <section class='recent-events'>
-  <h3 class='user-header'>Recent events</h3>
+  <h2>Recent events</h2>
   <ul>
     <% @client.user_events.last( 5 ).reverse.each do | event | %>
       <% event_datetime = event.created_at.in_time_zone( 'America/New_York' ) %>
@@ -18,23 +18,27 @@
 </section>
 
 <section>
-  <h3 class='user-header'>Credits</h3>
-  <% if @client.credits.empty? %>
-    <span>You have no credits. Contact your hypnotist for credits.</span>
-  <% else %>
-      <% @client.credits.each do | credit | %>
-        <li>You purchased <b><%= "#{ credit.value } credit#{ credit.value > 1 ? 's' : '' }" %></b> on <%= credit.date.strftime( '%B %-d, %Y' ) %>. <%= link_to 'View invoice', invoice_path( credit.id ) %></li>
-      <% end %>
-  <% end %>
+  <h2 class='user-header'>Credits</h2>
+  <ul>
+    <% if @client.credits.empty? %>
+      <span>You have no credits. Contact your hypnotist for credits.</span>
+    <% else %>
+        <% @client.credits.each do | credit | %>
+          <li>You purchased <b><%= "#{ credit.value } credit#{ credit.value > 1 ? 's' : '' }" %></b> on <%= credit.date.strftime( '%B %-d, %Y' ) %>. <%= link_to 'View invoice', invoice_path( credit.id ) %></li>
+        <% end %>
+    <% end %>
+  </ul>
 </section>
 
 <section>
-  <h3 class='user-header'>Appointments</h3>
+  <h2 class='user-header'>Appointments</h2>
+  <% upcoming_appointments = @client.appointments.where( 'start > ?', DateTime.now ) %>
   <ul>
-  <% if @client.release_signatures.empty? %>
-    <li class='warning'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
-  <% elsif @client.appointments.where( 'start > ?', DateTime.now ).empty? %>
-    <span>You have no upcoming appointments. Use credits to schedule appointments.</span>
-  <% end %>
+    <% if @client.release_signatures.empty? %>
+      <li class='warning'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
+    <% elsif upcoming_appointments.empty? %>
+      <span>You have no upcoming appointments.</span>
+    <% end %>
+    <%= link_to 'Schedule an appointment', new_appointment_path if @client.balance > 0 %>
   </ul>
 </section>

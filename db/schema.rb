@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2024_09_11_181607) do
     t.string "last_name"
     t.string "phone"
     t.string "email"
+    t.text "availability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
