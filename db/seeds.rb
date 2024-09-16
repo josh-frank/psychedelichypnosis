@@ -5,3 +5,47 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+jed = {
+  username: 'jsackin',
+  password: '123456',
+  first_name: 'Jed',
+  last_name: 'Sackin',
+  email: 'jsackin@gabelli.com',
+}
+Client.create( jed )
+
+josh_availability = <<~EOS
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+CLASS:PUBLIC
+DESCRIPTION:
+DTSTART:20240914T110000Z
+DTEND:20240914T170000Z
+FREQ=WEEKLY;BYDAY=SA,SU;INTERVAL=1
+LOCATION:
+SUMMARY;LANGUAGE=en-us:
+END:VEVENT
+BEGIN:VEVENT
+CLASS:PUBLIC
+DESCRIPTION:
+DTSTART:20000101T180000Z
+DTEND:20000101T210000Z
+FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;INTERVAL=1
+LOCATION:
+SUMMARY;LANGUAGE=en-us:
+END:VEVENT
+END:VCALENDAR
+EOS
+
+josh = {
+  username: 'jfrank',
+  password: '123456',
+  first_name: 'Josh',
+  last_name: 'Frank',
+  phone: '2014216993',
+  email: 'jfrank@gabelli.com',
+  availability: josh_availability
+}
+Hypnotist.create( josh )
