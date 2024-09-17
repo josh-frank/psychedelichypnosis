@@ -205,6 +205,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -264,6 +266,7 @@ DEPENDENCIES
   rails (~> 7.0.0)
   sass-rails (~> 5.0)
   selenium-webdriver
+  simple_calendar
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

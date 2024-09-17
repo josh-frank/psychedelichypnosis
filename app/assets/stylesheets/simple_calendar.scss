@@ -1,0 +1,31 @@
+.simple-calendar {
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.simple-calendar table {
+  margin: 0 auto;
+}
+
+.calendar-heading {
+  text-align: center;
+}
+
+.simple-calendar th,
+.simple-calendar td {
+  min-width: 10vw;
+  min-height: 10vh;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 800px) {
+
+  .simple-calendar th,
+  .simple-calendar td {
+    min-width: 10px;
+    min-height: 10px;
+    vertical-align: top;
+  }
+
+}

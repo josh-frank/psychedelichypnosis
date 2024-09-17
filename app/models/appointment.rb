@@ -8,7 +8,7 @@ class Appointment < ApplicationRecord
   private
 
   def no_appointment_overlap
-    if Appointment.where( "(DATETIME(#{ self.start }) BETWEEN start AND end OR DATETIME(#{ self.end }) BETWEEN start AND end) AND hypnotist_id = #{ self.hypnotist_id } AND client_id = #{ self.client_id }", self.start, self.end, self.hypnotist_id, self.client_id ).any?
+    if Appointment.where( start: self.start..self.end, hypnotist: self.hypnotist, client: self.client ).any?
       errors.add( :end, "overlaps another reservation" )
     end
   end

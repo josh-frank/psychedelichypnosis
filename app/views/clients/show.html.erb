@@ -33,12 +33,19 @@
 <section>
   <h2 class='user-header'>Appointments</h2>
   <% upcoming_appointments = @client.appointments.where( 'start > ?', DateTime.now ) %>
-  <ul>
-    <% if @client.release_signatures.empty? %>
-      <li class='warning'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
-    <% elsif upcoming_appointments.empty? %>
-      <span>You have no upcoming appointments.</span>
+  <% if @client.release_signatures.empty? %>
+    <li class='warning'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
+  <% elsif upcoming_appointments.empty? %>
+    <span>You have no upcoming appointments.</span>
+  <% else %>
+    <%= week_calendar do | date | %>
+      <%= date.day %>
+      <% @client.appointments.each do | appointment | %>
+        <% if appointment.start.to_date == date %>
+          <div><%= "#{ appointment.start.strftime( '%I%P' ) }" %></div>
+        <% end %>
+      <% end %>
     <% end %>
-    <%= link_to 'Schedule an appointment', new_appointment_path if @client.balance > 0 %>
-  </ul>
+  <% end %>
+  <%= link_to 'Schedule an appointment', new_appointment_path if @client.balance > 0 %>
 </section>
