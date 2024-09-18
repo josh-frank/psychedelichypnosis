@@ -18,16 +18,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <!-- <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %> -->
-        <th>S</th>
-        <th>M</th>
-        <th>T</th>
-        <th>W</th>
-        <th>T</th>
-        <th>F</th>
-        <th>S</th>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th><%= t('date.abbr_day_names')[day.wday].first %><%= day.strftime( '%d' ) %></th>
+        <% end %>
       </tr>
     </thead>
 

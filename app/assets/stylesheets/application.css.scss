@@ -74,13 +74,9 @@
   font-style: italic;
 }
 
-ol li {
+ol li:not( :last-child ) {
   padding-bottom: 1rem;
 }
-
-// h1 {
-//   white-space: nowrap;
-// }
 
 .recent-events {
   display: block;
@@ -120,13 +116,9 @@ ol li {
   flex-flow: row wrap;
 }
 
-.calendar {
-  width: 100%;
+.privacy-policy li:not( :last-child ) {
+  padding-bottom: 1em;
 }
-
-// .calendar-heading {}
-
-// .calendar-body {}
 
 @media screen and ( max-width: 800px ) {
 

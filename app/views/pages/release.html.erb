@@ -24,15 +24,15 @@
 
 <p><b>I certify that I have read this document, fully understand its content and agree to its terms. I am aware that this document is a release of liability and a contract, and I sign it of my own free will.</b></p>
 
-<%= form_with class: 'sign-release-form', scope: :release_signature, url: sign_release_path, method: 'post' do | f | %>
-  <%= f.hidden_field :client_id, value: current_user.id %>
+<%= form_with class: 'sign-release-form', scope: :release_signature, url: sign_release_path, method: :post do | form | %>
+  <%= form.hidden_field :client_id, value: current_user.id %>
   <span>
-    <%= f.label :e_signature, 'E-Signature - Type your full legal name:' %>
-    <%= f.text_field :e_signature, name: 'release_signature[e_signature]', required: true %>
+    <%= form.label :e_signature, 'E-Signature - Type your full legal name:' %>
+    <%= form.text_field :e_signature, name: 'release_signature[e_signature]', required: true %>
   </span>
   <span>
-    <%= f.label :date %>
-    <%= f.date_field :date, name: 'release_signature[date]', required: true, placeholder: Date.today %>
+    <%= form.label :date %>
+    <%= form.date_field :date, name: 'release_signature[date]', required: true, placeholder: Date.today %>
   </span>
-  <%= f.submit 'Sign' %>
+  <%= form.submit 'Sign' %>
 <% end %>

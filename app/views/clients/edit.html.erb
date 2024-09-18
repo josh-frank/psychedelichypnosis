@@ -1,0 +1,7 @@
+<%= form_with url: "/clients/:id", method: :patch do | form | %>
+  <%= form.label :phone, "Phone #:" %>
+  <%= form.text_field :phone, placeholder: @client.phone %>
+  <%= form.label :phone, "Email:" %>
+  <%= form.text_field :email, placeholder: @client.email %>
+  <%= form.submit "Save" %>
+<% end %>

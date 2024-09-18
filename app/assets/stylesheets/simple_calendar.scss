@@ -1,4 +1,5 @@
 .simple-calendar {
+  width: 40vw;
   background-color: #ddd;
   border-radius: 1em;
   padding: 1em;
@@ -14,17 +15,30 @@
 
 .simple-calendar th,
 .simple-calendar td {
-  min-width: 10vw;
-  min-height: 10vh;
+  min-width: 5vw;
+  min-height: 5vh;
   vertical-align: top;
+}
+
+.simple-calendar td:not(:last-child) {
+  border-right: 1px solid black;
+}
+
+.simple-calendar li {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 800px) {
 
+  .simple-calendar {
+    width: auto;
+    padding: 1em 0;
+  }
+
   .simple-calendar th,
   .simple-calendar td {
-    min-width: 10px;
-    min-height: 10px;
+    min-width: 2rem;
+    min-height: 2rem;
     vertical-align: top;
   }
 
