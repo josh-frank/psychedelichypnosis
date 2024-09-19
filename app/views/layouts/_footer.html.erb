@@ -1,7 +1,7 @@
 <footer id="footer">
     <div>&copy;<%= Time.now.strftime( "%Y" ) %> Psychedelic Hypnosis</div>
     <% unless request.fullpath.match?( 'privacy' ) %>
-        <div>By using this website you consent to the use of cookies <%= link_to '(see privacy policy)', privacy_path %></div>
+        <div>By browsing this website you consent to the use of cookies <%= link_to '(see privacy policy)', privacy_path %></div>
     <% end %>
     
     <br />

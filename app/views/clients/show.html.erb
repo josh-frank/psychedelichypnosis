@@ -39,10 +39,9 @@
     <span>You have no upcoming appointments.</span>
   <% else %>
     <%= week_calendar do | date | %>
-      <%= date.day %>
       <% @client.appointments.each do | appointment | %>
         <% if appointment.start.to_date == date %>
-          <div><%= "#{ appointment.start.strftime( '%I%P' ) }" %></div>
+          <div><%= link_to "#{ appointment.start.strftime( '%I%P' ) }", appointment_path( appointment.id ) %></div>
         <% end %>
       <% end %>
     <% end %>
@@ -53,9 +52,10 @@
 <section>
   <h2>Profile</h2>
   <ul>
-    <li>Full name: <%= @client.full_name %></li>
-    <li>Phone #: <%= @client.phone %></li>
-    <li>Email: <%= @client.email %></li>
+    <li>Full name: <b><%= @client.full_name %></b></li>
+    <li>Phone #: <b><%= @client.phone.blank? ? 'none' : @client.phone %></b></li>
+    <li>Email: <b><%= @client.email %></b></li>
+    <br />
     <div><%= link_to 'Click here', edit_client_path( @client.id ) %> to edit personal info or change your password</div>
   </ul>
 </section>

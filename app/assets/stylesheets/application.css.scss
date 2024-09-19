@@ -105,8 +105,9 @@ ol li:not( :last-child ) {
 .warning {
   padding: 5px;
   font-weight: bold;
-  color: white;
-  background-color: #c00;
+  color: #c00;
+  border: 1px solid #c00;
+  border-radius: 5px;
   width: auto;
   display: inline-block;
 }

@@ -4,7 +4,7 @@ class ReleaseSignaturesController < ApplicationController
     @release_signature = ReleaseSignature.create( release_signature_params )
     if @release_signature.valid?
       UserEvent.create( client: @release_signature.client, description: 'signed the release form', ip_address: request.remote_ip )
-      flash[ :messages ] = [ "Release signed successfully" ]
+      flash[ :messages ] ||= [ "Release signed successfully" ]
       redirect_to client_path( current_user )
     else
       flash[ :messages ] ||= @release_signature.errors.full_messages

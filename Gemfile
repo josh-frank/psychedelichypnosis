@@ -20,7 +20,9 @@ gem 'webpacker'
 # gem 'mini_racer', platforms: :ruby
 
 gem 'icalendar'
-gem "simple_calendar"
+gem 'icalendar-recurrence'
+gem 'ice_cube', '= 0.16.4'
+gem 'simple_calendar'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

@@ -10,9 +10,8 @@ class ClientsController < ApplicationController
   end
   
   def update
-    @client.update( client_params )
-    if @client.valid?
-      flash[ :messages ] = [ 'Updated successfully' ]
+    if @client.update( client_params )
+      flash[ :messages ] ||= [ 'Updated successfully' ]
     else
       flash[ :messages ] ||= @client.errors.full_messages
     end    
@@ -26,7 +25,7 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.require( :client ).permit( :username, :password, :first_name, :last_name, :phone, :email )
+    params.require( :client ).permit( :username, :password, :password_confirmation, :first_name, :last_name, :phone, :email )
   end
 
 end

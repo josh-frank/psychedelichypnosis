@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless logged_in? 
-      flash[ :messages ] = [ "You must be logged in!" ]
+      flash[ :messages ] ||= [ "You must be logged in!" ]
       redirect_to home_path
     end
   end

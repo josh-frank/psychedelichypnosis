@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   ##Appointments
   get '/appointments/new', to: 'appointments#new', as: 'new_appointment'
+  get '/appointments/:id', to: 'appointments#show', as: 'appointment'
   post '/appointments', to: 'appointments#create'
 
 end

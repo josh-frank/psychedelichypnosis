@@ -9,4 +9,8 @@ class Hypnotist < ApplicationRecord
   has_many :credits
   has_many :clients, through: :credits
 
+  def parse_availability
+    Icalendar::Calendar.parse( self.availability )
+  end
+
 end

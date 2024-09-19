@@ -1,7 +1,36 @@
-<%= form_with url: "/clients/:id", method: :patch do | form | %>
-  <%= form.label :phone, "Phone #:" %>
-  <%= form.text_field :phone, placeholder: @client.phone %>
-  <%= form.label :phone, "Email:" %>
-  <%= form.text_field :email, placeholder: @client.email %>
+<h1>Edit profile</h1>
+
+<%= form_with scope: :client, url: "/clients/:id", method: :patch, class: 'edit-profile' do | form | %>
+  <%= form.hidden_field :client_id, value: @client.id %>
+  <div>
+    <%= form.label :first_name, "First name:" %>
+    <%= form.text_field :first_name, placeholder: @client.first_name %>
+  </div>
+  <div>
+    <%= form.label :last_name, "Last name:" %>
+    <%= form.text_field :last_name, placeholder: @client.last_name %>
+  </div>
+  <div>
+    <%= form.label :phone, "Phone #:" %>
+    <%= form.text_field :phone, placeholder: @client.phone %>
+  </div>
+  <div>
+    <%= form.label :email, "Email:" %>
+    <%= form.text_field :email, placeholder: @client.email %>
+  </div>
   <%= form.submit "Save" %>
+<% end %>
+
+<h2>Change password</h2>
+
+<%= form_with scope: :client, url: "/clients/:id", method: :patch, class: 'edit-profile' do | form | %>
+  <div>
+    <%= form.label :password, "New password:" %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation, "Confirm new password:" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <%= form.submit "Update" %>
 <% end %>
