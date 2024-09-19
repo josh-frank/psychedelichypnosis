@@ -23,14 +23,19 @@
 
 <h2>Change password</h2>
 
-<%= form_with scope: :client, url: "/clients/:id", method: :patch, class: 'edit-profile' do | form | %>
+<%= form_with scope: :client, url: "/change_password/:id", method: :patch, class: 'edit-profile' do | form | %>
+  <%= form.hidden_field :client_id, value: @client.id %>
+  <div>
+    <%= form.label :password, "Old password:" %>
+    <%= form.password_field :old_password, required: true %>
+  </div>
   <div>
     <%= form.label :password, "New password:" %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, required: true %>
   </div>
   <div>
     <%= form.label :password_confirmation, "Confirm new password:" %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, required: true %>
   </div>
   <%= form.submit "Update" %>
 <% end %>

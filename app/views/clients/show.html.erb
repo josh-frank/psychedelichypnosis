@@ -41,7 +41,7 @@
     <%= week_calendar do | date | %>
       <% @client.appointments.each do | appointment | %>
         <% if appointment.start.to_date == date %>
-          <div><%= link_to "#{ appointment.start.strftime( '%I%P' ) }", appointment_path( appointment.id ) %></div>
+          <div><%= link_to "#{ appointment.start.strftime( '%I%P' ).sub( '0', '' ) }", appointment_path( appointment.id ) %></div>
         <% end %>
       <% end %>
     <% end %>

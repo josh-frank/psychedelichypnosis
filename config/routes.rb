@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/clients/:id', to: 'clients#show', as: 'client'
   get '/clients/:id/edit', to: 'clients#edit', as: 'edit_client'
   patch '/clients/:id', to: 'clients#update'
+  patch '/change_password/:id', to: 'clients#change_password', as: 'change_password'
 
   ##Release form
   get '/release_form', to: 'pages#release', as: 'release_form'
