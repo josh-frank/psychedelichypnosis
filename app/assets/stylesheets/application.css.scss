@@ -78,23 +78,6 @@ ol li:not( :last-child ) {
   padding-bottom: 1rem;
 }
 
-.recent-events {
-  display: block;
-  float: right;
-  width: 15vw;
-  background-color: #ddd;
-  border-radius: 1em;
-  padding: 0 1em;
-  margin: 0 0 1em 1em;
-  font-size: 9pt;
-  font-style: italic;
-}
-
-.user-header {
-  font-size: 18pt;
-  margin-bottom: 1em;
-}
-
 .big-button {
   display: block;
   margin: 0 auto;
@@ -102,7 +85,7 @@ ol li:not( :last-child ) {
   font-size: 14pt;
 }
 
-.warning {
+[role=alert] {
   padding: 5px;
   font-weight: bold;
   color: #c00;
@@ -131,7 +114,7 @@ ol li:not( :last-child ) {
     margin-bottom: 1em;
   }
 
-  .sidebar, .recent-events {
+  .sidebar {
     display: block;
     float: unset;
     width: auto;

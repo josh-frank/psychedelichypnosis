@@ -1,3 +1,20 @@
+.recent-events {
+  display: block;
+  float: right;
+  width: 15vw;
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 0 1em;
+  margin: 0 0 1em 1em;
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.user-header {
+  font-size: 18pt;
+  margin-bottom: 1em;
+}
+
 .edit-profile {
   display: flex;
   flex-flow: column;
@@ -6,4 +23,17 @@
 
 .edit-profile input[type=submit] {
   width: 5rem;
+}
+
+@media screen and (max-width: 800px) {
+
+  .recent-events {
+    display: block;
+    float: unset;
+    width: auto;
+    padding: 1em;
+    margin: 0 auto;
+    margin-bottom: 1em;
+  }
+
 }

@@ -11,6 +11,7 @@ class ClientsController < ApplicationController
   
   def update
     if @client.update( client_params )
+      UserEvent.create( client: @client, description: 'updated profile', ip_address: request.remote_ip )
       flash[ :messages ] ||= [ 'Updated successfully' ]
     else
       flash[ :messages ] ||= @client.errors.full_messages
@@ -23,6 +24,7 @@ class ClientsController < ApplicationController
     new_passwords_match = client_params[ :password ] == client_params[ :password_confirmation ]
     if authenticate_user && new_passwords_match
       if @client.update( password: client_params[ :password ] )
+        UserEvent.create( client: @user, description: 'changed password', ip_address: request.remote_ip )
         flash[ :messages ] ||= [ 'Password changed successfully' ]
       else
         flash[ :messages ] ||= @client.errors.full_messages

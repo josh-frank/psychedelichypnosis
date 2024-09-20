@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   patch '/clients/:id', to: 'clients#update'
   patch '/change_password/:id', to: 'clients#change_password', as: 'change_password'
 
+  ##Hypnotists
+  get '/hypnotists/:id', to: 'hypnotists#show', as: 'hypnotist'
+
   ##Release form
   get '/release_form', to: 'pages#release', as: 'release_form'
   post '/release_form', to: 'release_signatures#create', as: 'sign_release'

@@ -6,27 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-jed = {
-  username: 'jsackin',
-  password: '123456',
-  first_name: 'Jed',
-  last_name: 'Sackin',
-  email: 'jsackin@gabelli.com',
-}
-Client.create( jed )
+started_seeding = Time.now
 
 josh_availability = <<~EOS
 BEGIN:VCALENDAR
 VERSION:2.0
-BEGIN:VEVENT
-CLASS:PUBLIC
-DESCRIPTION:Description
-DTSTART:20000101T110000-0500
-DTEND:20000101T170000-0500
-RRULE:FREQ=WEEKLY;BYDAY=SA,SU;INTERVAL=1
-LOCATION:Location
-SUMMARY;LANGUAGE=en-us:Summary
-END:VEVENT
 BEGIN:VEVENT
 CLASS:PUBLIC
 DESCRIPTION:Description
@@ -36,10 +20,18 @@ RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;INTERVAL=1
 LOCATION:Location
 SUMMARY;LANGUAGE=en-us:Summary
 END:VEVENT
+BEGIN:VEVENT
+CLASS:PUBLIC
+DESCRIPTION:Description
+DTSTART:20000101T110000-0500
+DTEND:20000101T170000-0500
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU;INTERVAL=1
+LOCATION:Location
+SUMMARY;LANGUAGE=en-us:Summary
+END:VEVENT
 END:VCALENDAR
 EOS
-
-josh = {
+josh_params = {
   username: 'jfrank',
   password: '123456',
   first_name: 'Josh',
@@ -48,4 +40,29 @@ josh = {
   email: 'jfrank@gabelli.com',
   availability: josh_availability
 }
-Hypnotist.create( josh )
+josh = Hypnotist.create( josh_params )
+
+jed_params = {
+  username: 'jsackin',
+  password: '123456',
+  first_name: 'Jed',
+  last_name: 'Sackin',
+  email: 'jsackin@gabelli.com',
+}
+jed = Client.create( jed_params )
+ReleaseSignature.create( client: jed, e_signature: jed.full_name, date: Date.today )
+Credit.create( client: jed, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+Appointment.create( client: jed, hypnotist: josh, start: DateTime.parse( '20241020T180000-0500' ), end: DateTime.parse( '20241020T190000-0500' ) )
+
+ryoji_params = {
+  username: 'rdohi',
+  password: '123456',
+  first_name: 'Ryoji',
+  last_name: 'Dohi',
+  email: 'rdohi@gabelli.com',
+}
+ryoji = Client.create( ryoji_params )
+
+done_seeding = Time.now
+
+puts "Seeded in #{done_seeding - started_seeding} seconds"

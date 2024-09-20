@@ -9,7 +9,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require( :appointment ).permit( :hypnotist_id, :client_id, :start, :end )
+    params.require( :appointment ).permit( :hypnotist_id, :client_id, :start, :end, :location, :lng, :lat, :notes )
   end
 
 end
