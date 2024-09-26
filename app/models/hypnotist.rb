@@ -13,6 +13,10 @@ class Hypnotist < ApplicationRecord
     "#{ self.first_name } #{ self.last_name }"
   end
 
+  def initialed_name
+    "#{ self.first_name } #{ self.last_name.first.upcase }."
+  end
+
   def icalendar
     Icalendar::Calendar.parse( self.availability ).first
   end
