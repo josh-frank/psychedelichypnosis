@@ -44,7 +44,10 @@
       <% end %>
     <% end %>
   <% end %>
-  <%= link_to 'Schedule an appointment', new_appointment_path if @client.balance > 0 %>
+  <% if @client.balance > 0 %>
+    <%= label_tag 'Select a hypnotist to schedule an appointment:' %>
+    <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'full_name' ), include_blank: true, onchange: "window.location.href = '/appointments/new/' + this.value;" %>
+  <% end %>
 </section>
 
 <section>

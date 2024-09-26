@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   post '/release_form', to: 'release_signatures#create', as: 'sign_release'
 
   ##Credits
-  get '/invoice/:id', to: 'credits#show', as: 'invoice'
+  get '/invoices/:id', to: 'credits#show', as: 'invoice'
 
   ##Appointments
-  get '/appointments/new', to: 'appointments#new', as: 'new_appointment'
+  get '/appointments/new/:id', to: 'appointments#new', as: 'new_appointment'
   get '/appointments/:id', to: 'appointments#show', as: 'appointment'
   post '/appointments', to: 'appointments#create'
 

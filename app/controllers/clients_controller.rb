@@ -3,6 +3,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [ :show, :edit, :update, :change_password ]
 
   def show
+    @hypnotists = Hypnotist.all
     @affirmation = @@affirmations.sample
   end
 

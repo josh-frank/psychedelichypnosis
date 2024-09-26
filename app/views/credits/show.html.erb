@@ -2,7 +2,7 @@
 
   <h3><%= "Invoice ##{ @credit.id }" %></h3>
 
-  <p><b>Client:</b> <%= "#{ @credit.client.full_name } • #{ @credit.client.phone } • #{ @credit.client.email }" %></p>
+  <p><b>Client:</b> <%= "#{ @credit.client.full_name }" %><%= " • #{ @credit.client.phone }" if @credit.client.phone.present? %><%= " • #{ @credit.client.email }" if @credit.client.email.present? %></p>
   
 </div>
 
@@ -18,15 +18,15 @@
     <tr>
       <td>Credit for <%= @credit.value %> hypnosis sessions</td>
       <td><%= number_to_currency( @credit.paid ) %></td>
-      <td><%= @credit.hypnotist.first_name %></td>
+      <td><%= "#{ @credit.hypnotist.first_name } #{ @credit.hypnotist.last_name.first }." %></td>
       <td><%= @credit.date %></td>
     </tr>
-    <tr class="invoice-total"><strong>
-      <td>TOTAL:</td>
-      <td><%= number_to_currency( @credit.paid ) %></td>
+    <tr class="invoice-total">
+      <td><strong>TOTAL:</strong></td>
+      <td><strong><%= number_to_currency( @credit.paid ) %></strong></td>
     </strong></tr>
   </tbody>
 
 </table>
 
-<strong style="text-align:center">Thank you for your business! It is my privilege to serve you!</strong>
+<p style="text-align:center"><strong>Thank you for your business! It is my privilege to serve you!</strong></p>

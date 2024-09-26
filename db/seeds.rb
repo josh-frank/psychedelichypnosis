@@ -52,7 +52,10 @@ jed_params = {
 jed = Client.create( jed_params )
 ReleaseSignature.create( client: jed, e_signature: jed.full_name, date: Date.today )
 Credit.create( client: jed, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
-Appointment.create( client: jed, hypnotist: josh, start: DateTime.parse( '20241020T180000-0500' ), end: DateTime.parse( '20241020T190000-0500' ) )
+2.times do
+  random_appointment_date = DateTime.now + rand( 30 )
+  Appointment.create( client: jed, hypnotist: josh, start: random_appointment_date.change( { hour: 18, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: 19, min: 0, sec: 0 } ) )
+end
 
 ryoji_params = {
   username: 'rdohi',

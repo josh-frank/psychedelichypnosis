@@ -1,1 +1,14 @@
-<h1>Schedule an appointment</h1>
+<h1>Schedule an appointment with <%= @hypnotist.full_name %></h1>
+
+<%= week_calendar do | date | %>
+  <% @availability.each do | block | %>
+    <% if block.begin.to_date == date %>
+      <div><%= "#{ block.begin.strftime( '%I%P' ).sub( '0', '' ) } - #{ block.end.strftime( '%I%P' ).sub( '0', '' ) }" %></div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<!--
+<%= label_tag 'Select a hypnotist:' %>
+<%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'full_name' ), include_blank: true %>
+-->
