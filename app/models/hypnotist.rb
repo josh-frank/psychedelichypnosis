@@ -1,3 +1,5 @@
+require 'icalendar/recurrence'
+
 class Hypnotist < ApplicationRecord
 
   has_secure_password
