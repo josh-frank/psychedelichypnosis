@@ -26,6 +26,9 @@ gem 'icalendar-recurrence'
 gem 'ice_cube', '= 0.16.4'
 gem 'simple_calendar'
 
+gem 'jquery-rails'
+gem 'turbolinks'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]

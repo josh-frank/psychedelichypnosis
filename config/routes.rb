@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   ##Sessions
   get '/login', to: 'sessions#client_login_form', as: 'client_login_form'
   post '/login', to: 'sessions#client_login'
-  delete '/', to: 'sessions#logout', as: 'logout'
+  delete '/logout', to: 'sessions#logout', as: 'logout'
 
   ##Clients
   get '/clients/:id', to: 'clients#show', as: 'client'

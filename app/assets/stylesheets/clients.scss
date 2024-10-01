@@ -25,6 +25,15 @@
   width: 5rem;
 }
 
+.sms-consent {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 0 0 1em 1em;
+}
+
 @media screen and (max-width: 800px) {
 
   .recent-events {

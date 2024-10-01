@@ -78,11 +78,17 @@ ol li:not( :last-child ) {
   padding-bottom: 1rem;
 }
 
-.big-button {
+.big-button button {
   display: block;
   margin: 0 auto;
   padding: 1rem;
   font-size: 14pt;
+}
+
+.big-button figcaption {
+  display: block;
+  font-size: 11px;
+  text-align: center;
 }
 
 [role="alert"] {
