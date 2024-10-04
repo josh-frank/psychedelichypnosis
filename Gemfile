@@ -29,6 +29,8 @@ gem 'simple_calendar'
 gem 'jquery-rails'
 gem 'turbolinks'
 
+gem 'twilio-ruby'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]

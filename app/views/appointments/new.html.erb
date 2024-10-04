@@ -1,14 +1,25 @@
+<script>
+  const setAppointmentDate = date => {
+    const formatDate = new Date( date ).toISOString().substring( 0, 16 );
+    document.getElementById( 'appointment_date' ).value = formatDate;
+  }
+</script>
+
 <h1>Schedule an appointment with <%= @hypnotist.full_name %></h1>
 
 <%= week_calendar do | date | %>
   <% @availability.each do | block | %>
     <% if block.begin.to_date == date %>
-      <div><%= "#{ block.begin.strftime( '%I%P' ).sub( '0', '' ) } - #{ block.end.strftime( '%I%P' ).sub( '0', '' ) }" %></div>
+      <% ( block.begin.to_i..block.end.to_i ).step( 1.hour ) do | hour | %>
+        <%= link_to Time.at( hour ).strftime( '%I%P' ).sub( '0', '' ), "javascript:setAppointmentDate( #{ hour * 1000 } );" %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
 
-<!--
-<%= label_tag 'Select a hypnotist:' %>
-<%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'full_name' ), include_blank: true %>
--->
+<%= form_with scope: :appointment, url: "/appointments/new", method: :post do | form | %>
+  <span>
+    <%= form.label :date %>
+    <%= form.datetime_local_field :date, required: true, id: "appointment_date" %>
+  </span>
+<% end %>

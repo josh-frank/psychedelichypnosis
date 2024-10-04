@@ -36,7 +36,7 @@ class Hypnotist < ApplicationRecord
   def appointments_available( start_date, end_date = start_date + 1 )
     result = []
     self.availability_between( start_date, end_date ).each do | availability_today |
-      appointments_today = self.appointments_between( start_date, end_date ).select{ | appointment | availability_today.overlaps?( appointment ) }
+      appointments_today = self.appointments_between( availability_today.begin )
       if appointments_today.present?
         appointments_today_range = appointments_today.map( &:begin ).min..appointments_today.map( &:end ).max
         if appointments_today_range.begin <= availability_today.begin

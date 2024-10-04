@@ -6,6 +6,7 @@ class Appointment < ApplicationRecord
   validate :release_signed
   validate :no_appointment_overlap
   validate :hypnotist_available
+  validates :hypnotist, :client, presence: true
 
   private
 

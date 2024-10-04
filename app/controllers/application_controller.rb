@@ -2,13 +2,14 @@ class ApplicationController < ActionController::Base
 
   @@affirmations = [
       "Every day, in every way, you're getting better and better.",
-      "You have within yourself all the instruments of your own well-being.",
       "You can do what has to be done.",
       "You are nourished by the fundamental life-force of the universe.",
       "Your love is the strongest force in the universe.",
       "You are pure enlightenment - nothing less.",
       "You deserve nothing less than love, happiness and complete enlightenment.",
       "Your potential is limitless.",
+      "You are a vital part of the greatest story in the universe.",
+      "Your enlightenment has already been achieved.",
       # "",
       # "",
   ]

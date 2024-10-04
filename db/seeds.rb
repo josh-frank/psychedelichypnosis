@@ -52,9 +52,10 @@ jed_params = {
 jed = Client.create( jed_params )
 ReleaseSignature.create( client: jed, e_signature: jed.full_name, date: Date.today )
 Credit.create( client: jed, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
-2.times do
+5.times do
   random_appointment_date = DateTime.now + rand( 30 )
-  Appointment.create( client: jed, hypnotist: josh, start: random_appointment_date.change( { hour: 18, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: 19, min: 0, sec: 0 } ) )
+  random_appointment_time = ( 18..20 ).to_a.sample
+  Appointment.create( client: jed, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
 
 ryoji_params = {
@@ -65,7 +66,30 @@ ryoji_params = {
   email: 'rdohi@gabelli.com',
 }
 ryoji = Client.create( ryoji_params )
+ReleaseSignature.create( client: ryoji, e_signature: ryoji.full_name, date: Date.today )
+Credit.create( client: ryoji, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+5.times do
+  random_appointment_date = DateTime.now + rand( 30 )
+  random_appointment_time = ( 11..20 ).to_a.sample
+  Appointment.create( client: ryoji, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
+end
+
+matt_params = {
+  username: 'madelhardt',
+  password: '123456',
+  first_name: 'Matthew',
+  last_name: 'Adelhardt',
+  email: 'madelhardt@gabelli.com',
+}
+matt = Client.create( matt_params )
+ReleaseSignature.create( client: matt, e_signature: matt.full_name, date: Date.today )
+Credit.create( client: matt, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+5.times do
+  random_appointment_date = DateTime.now + rand( 30 )
+  random_appointment_time = ( 11..20 ).to_a.sample
+  Appointment.create( client: matt, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
+end
 
 done_seeding = Time.now
 
-puts "Seeded in #{done_seeding - started_seeding} seconds"
+puts "Seeded in #{ done_seeding - started_seeding } seconds"

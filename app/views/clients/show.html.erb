@@ -53,12 +53,10 @@
 <section>
   <h2>Profile</h2>
   <ul>
-    <% unless @client.sms_consent %>
-      <aside role='alert'>Automated SMS/texting is turned off for your profile. You won't receive automated account or appointment reminders.</aside>
-    <% end %>
     <li>Full name: <b><%= @client.full_name %></b></li>
     <li>Phone #: <b><%= @client.phone.blank? ? 'none' : @client.phone %></b></li>
     <li>Email: <b><%= @client.email %></b></li>
+    <li>Automated messages: <b>Turned <%= @client.sms_consent ? 'on' : 'off' %></b></li>
     <br />
     <div><%= link_to 'Click here', edit_client_path( @client.id ) %> to edit your profile or change your password</div>
   </ul>
