@@ -21,6 +21,8 @@ gem 'importmap-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+gem 'dotenv-rails'
+
 gem 'icalendar', '= 2.10.2'
 gem 'icalendar-recurrence'
 gem 'ice_cube', '= 0.16.4'
