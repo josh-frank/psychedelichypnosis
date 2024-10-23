@@ -5,15 +5,11 @@
   }
 </script>
 
-<h1>Schedule an appointment with <%= @hypnotist.full_name %></h1>
+<h1>Schedule an appointment with <%= @hypnotist.initialed_name %></h1>
 
 <%= week_calendar do | date | %>
-  <% @availability.each do | block | %>
-    <% if block.begin.to_date == date %>
-      <% ( block.begin.to_i..block.end.to_i ).step( 1.hour ) do | hour | %>
-        <%= link_to Time.at( hour ).strftime( '%I%P' ).sub( '0', '' ), "javascript:setAppointmentDate( #{ hour * 1000 } );" %>
-      <% end %>
-    <% end %>
+  <% @availability.each do | slot | %>
+    <%= link_to slot.strftime( '%I%P' ).sub( '0', '' ), "javascript:setAppointmentDate( #{ slot.to_i * 1000 } );" if slot.to_date == date %>
   <% end %>
 <% end %>
 

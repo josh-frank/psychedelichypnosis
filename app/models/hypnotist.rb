@@ -34,34 +34,11 @@ class Hypnotist < ApplicationRecord
   end
 
   def appointments_available( start_date, end_date = start_date + 1 )
-    result = []
-    self.availability_between( start_date, end_date ).each do | availability_today |
-      appointments_today = self.appointments_between( availability_today.begin )
-      if appointments_today.present?
-        appointments_today_range = appointments_today.map( &:begin ).min..appointments_today.map( &:end ).max
-        if appointments_today_range.begin <= availability_today.begin
-          result.push( appointments_today_range.end..availability_today.end )
-        elsif appointments_today_range.end >= availability_today.end
-          result.push( availability_today.begin..appointments_today_range.begin )
-        else
-          result.push( availability_today.begin..appointments_today_range.begin )
-          result.push( appointments_today_range.end..availability_today.end )
-        end
-      else
-        result.push( availability_today )
-      end
+    appointments = self.appointments_between( start_date, end_date ).flat_map( &:begin )
+    availability = self.availability_between( start_date, end_date ).flat_map do | day |
+      ( day.begin.to_i..day.end.to_i ).step( 1.hour ).map{ | slot | Time.at( slot ) }
     end
-    result
-  end
-
-  private
-
-  def ranges_overlap?( a, b )
-    a.include?( b.begin ) || b.include?( a.begin )
-  end
-
-  def merge_ranges( a, b )
-    [ a.begin, b.begin ].min..[ a.end, b.end ].max
+    availability.filter{ | slot | !appointments.include?( slot ) }
   end
 
 end

@@ -51,9 +51,9 @@ jed_params = {
 }
 jed = Client.create( jed_params )
 ReleaseSignature.create( client: jed, e_signature: jed.full_name, date: Date.today )
-Credit.create( client: jed, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+Credit.create( client: jed, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 60 ) )
 5.times do
-  random_appointment_date = DateTime.now + rand( 30 )
+  random_appointment_date = DateTime.now + rand( 60 )
   random_appointment_time = ( 18..20 ).to_a.sample
   Appointment.create( client: jed, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
@@ -67,9 +67,9 @@ ryoji_params = {
 }
 ryoji = Client.create( ryoji_params )
 ReleaseSignature.create( client: ryoji, e_signature: ryoji.full_name, date: Date.today )
-Credit.create( client: ryoji, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+Credit.create( client: ryoji, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 60 ) )
 5.times do
-  random_appointment_date = DateTime.now + rand( 30 )
+  random_appointment_date = DateTime.now + rand( 60 )
   random_appointment_time = ( 11..20 ).to_a.sample
   Appointment.create( client: ryoji, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
@@ -83,9 +83,9 @@ matt_params = {
 }
 matt = Client.create( matt_params )
 ReleaseSignature.create( client: matt, e_signature: matt.full_name, date: Date.today )
-Credit.create( client: matt, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 30 ) )
+Credit.create( client: matt, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 60 ) )
 5.times do
-  random_appointment_date = DateTime.now + rand( 30 )
+  random_appointment_date = DateTime.now + rand( 60 )
   random_appointment_time = ( 11..20 ).to_a.sample
   Appointment.create( client: matt, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
