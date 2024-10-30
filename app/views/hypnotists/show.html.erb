@@ -3,7 +3,7 @@
 <%= week_calendar do | date | %>
   <% @availability.each do | block | %>
     <% if block.begin.to_date == date %>
-      <div><%= "#{ block.begin.strftime( '%I%P' ).sub( '0', '' ) } - #{ block.end.strftime( '%I%P' ).sub( '0', '' ) }" %></div>
+      <div><%= "#{ block.begin.strftime( '%-I%P' ) } - #{ block.end.strftime( '%-I%P' ) }" %></div>
     <% end %>
   <% end %>
 <% end %>

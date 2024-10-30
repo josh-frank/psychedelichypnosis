@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
             UserEvent.create( client: @user, description: 'logged in', ip_address: request.remote_ip )
             redirect_to client_path( @user )
         else
-            flash[ :messages ] ||= [ 'Invalid username or password!' ]
+            flash[ :messages ] ||= [ 'Invalid username or password' ]
             redirect_to client_login_form_path
         end
     end

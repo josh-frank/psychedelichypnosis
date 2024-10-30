@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
 
-  before_action :set_appointment, only: [ :show ]
+  before_action :set_appointment, only: [ :show, :destroy ]
 
   def new
     @hypnotists = Hypnotist.all
@@ -12,9 +12,27 @@ class AppointmentsController < ApplicationController
   end
 
   def create
+    @appointment = Appointment.new( appointment_params.except( :cancellation_policy ) )
+    appointment_start = appointment_params[ :start ].to_datetime
+    @appointment.update( start: appointment_start, end: 1.hour.after( appointment_start ) )
+    @appointment.save
+    if @appointment.valid?
+      UserEvent.create( client: @appointment.client, description: 'scheduled an appointment', ip_address: request.remote_ip )
+      flash[ :messages ] ||= [ "Appointment scheduled successfully" ]
+      redirect_to client_path( current_user )
+    else
+      flash[ :messages ] ||= @appointment.errors.full_messages
+      redirect_to new_appointment_path( @appointment.hypnotist.id )
+    end
   end
 
   def show
+  end
+
+  def destroy
+    @appointment.destroy
+    flash[ :messages ] ||= [ "Appointment cancelled successfully" ]
+    redirect_to client_path( current_user )
   end
 
   private
@@ -28,7 +46,7 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require( :appointment ).permit( :hypnotist_id, :client_id, :start, :end, :location, :lng, :lat, :notes )
+    params.require( :appointment ).permit( :hypnotist_id, :client_id, :start, :end, :location, :lng, :lat, :notes, :cancellation_policy )
   end
 
 end

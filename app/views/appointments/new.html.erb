@@ -1,7 +1,7 @@
 <script>
-  const setAppointmentDate = date => {
+  setAppointmentDate = date => {
     const formatDate = new Date( date ).toISOString().substring( 0, 16 );
-    document.getElementById( 'appointment_date' ).value = formatDate;
+    document.getElementById( 'appointment_start' ).value = formatDate;
   }
 </script>
 
@@ -9,13 +9,28 @@
 
 <%= week_calendar do | date | %>
   <% @availability.each do | slot | %>
-    <%= link_to slot.strftime( '%I%P' ).sub( '0', '' ), "javascript:setAppointmentDate( #{ slot.to_i * 1000 } );" if slot.to_date == date %>
+    <%= link_to slot.strftime( '%-I%P' ), "javascript:setAppointmentDate( #{ slot.to_i * 1000 } );" if slot.to_date == date %>
   <% end %>
 <% end %>
 
-<%= form_with scope: :appointment, url: "/appointments/new", method: :post do | form | %>
-  <span>
-    <%= form.label :date %>
-    <%= form.datetime_local_field :date, required: true, id: "appointment_date" %>
-  </span>
+<%= form_with scope: :appointment, url: "/appointments", method: :post, class: "new-appointment-form" do | form | %>
+  <%= form.hidden_field :client_id, value: current_user.id %>
+  <%= form.hidden_field :hypnotist_id, value: params[ :id ] %>
+  <div style="padding: 1em 0 1em 1em">
+    <%= form.label :start, "Appointment date: " %>
+    <%= form.datetime_local_field :start, required: true, id: "appointment_start" %>
+  </div>
+  <div style="padding: 0 0 1em 1em">
+    <%= form.label :notes, "Notes for your hypnotist (optional):" %>
+    <br />
+    <%= form.text_area :notes, cols: 40 %>
+  </div>
+  <div class="consent">
+    <%= form.check_box :cancellation_policy, required: true, oninvalid: "this.setCustomValidity( 'Please agree to the cancellation policy to schedule an appointment.' )", oninput: "this.setCustomValidity( '' )" %>
+    <br />
+    <span>
+      <b><%= form.label :cancellation_policy, "Check to agree to the cancellation policy:" %></b> You can cancel <u>up to 24 hours before your appointment</u> by clicking on your appointment from your profile, or by contacting your hypnotist.
+    </span>
+  </div>
+  <%= form.submit "Schedule appointment", style: "margin: 1em" %>
 <% end %>

@@ -19,7 +19,7 @@
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
-          <th><%= '*' if day == Date.today %><%= t('date.abbr_day_names')[day.wday].first %><%= day.strftime( '%d' ) %><%= '*' if day == Date.today %></th>
+          <th><%= '*' if day == Date.today %><%= t('date.abbr_day_names')[day.wday].first %><%= day.strftime( '%-d' ) %><%= '*' if day == Date.today %></th>
         <% end %>
       </tr>
     </thead>

@@ -24,7 +24,7 @@
 <h2>SMS consent</h2>
 <%= form_with scope: :client, url: "/clients/:id", method: :patch do | form | %>
   <%= form.hidden_field :client_id, value: @client.id %>
-  <div class="sms-consent">
+  <div class="consent">
     <%= form.check_box :sms_consent, checked: @client.sms_consent %>
     <br />
     <%= form.label :sms_consent, "By checking this box, I consent to receiving automated text messages." %>

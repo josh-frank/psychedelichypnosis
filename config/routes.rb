@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   get '/appointments/new/:id', to: 'appointments#new', as: 'new_appointment'
   get '/appointments/:id', to: 'appointments#show', as: 'appointment'
   post '/appointments', to: 'appointments#create'
+  delete '/appointments/:id', to: 'appointments#destroy', as: 'cancel_appointment'
 
 end

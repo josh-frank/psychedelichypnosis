@@ -37,16 +37,16 @@
     <span>You have no upcoming appointments.</span>
   <% else %>
     <%= week_calendar do | date | %>
-      <% @client.appointments.each do | appointment | %>
+      <% @client.appointments.order( start: :asc ).each do | appointment | %>
         <% if appointment.start.to_date == date %>
-          <div><%= link_to "#{ appointment.start.strftime( '%I%P' ).sub( '0', '' ) }", appointment_path( appointment.id ) %></div>
+          <div><%= link_to "#{ appointment.start.strftime( '%-I%P' ) }", appointment_path( appointment.id ) %></div>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
   <% if @client.balance > 0 %>
     <%= label_tag 'Select a hypnotist to schedule an appointment:' %>
-    <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'full_name' ), include_blank: true, onchange: "window.location.href = '/appointments/new/' + this.value;" %>
+    <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'initialed_name' ), include_blank: true, onchange: "if ( this.value ) { window.location.href = '/appointments/new/' + this.value }" %>
   <% end %>
 </section>
 

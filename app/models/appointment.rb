@@ -18,8 +18,8 @@ class Appointment < ApplicationRecord
   end
 
   def no_appointment_overlap
-    if Appointment.where( start: self.start..self.end, hypnotist: self.hypnotist, client: self.client ).any?
-      errors.add( :start, "overlaps another reservation" )
+    if Appointment.where.not( id: self.id ).where( start: self.start..self.end, hypnotist: self.hypnotist ).any?
+      errors.add( :start, "overlaps another appointment" )
     end
   end
 

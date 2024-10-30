@@ -101,6 +101,14 @@ ol li:not( :last-child ) {
   display: inline-block;
 }
 
+.consent {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: #ddd;
+  border-radius: 1em;
+  padding: 1em;
+}
+
 .sign-release-form {
   display: flex;
   flex-flow: row wrap;

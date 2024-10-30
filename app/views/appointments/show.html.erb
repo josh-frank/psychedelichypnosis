@@ -1,1 +1,15 @@
+<% format_appointment_time = @appointment.start.strftime( '%A, %B %-d, %Y at %-I%P' ) %>
+
 <h1>Appointment details</h1>
+
+<h2>You have an appointment on <%= format_appointment_time %>.</h2>
+<p>Location: <%= @appointment.location || "not yet updated" %></p>
+
+<%= form_with scope: :appointment, url: cancel_appointment_path, method: :delete, class: "consent" do | form | %>
+  <%= form.hidden_field :id, value: params[ :id ] %>
+  <div>
+    <h3>Cancel this appointment</h3>
+    <p>Click the button below to cancel this appointment. Canceling makes this time slot available for other clients, so <b>this appointment time may not be available if/when you change your mind!</b></p>
+    <%= form.submit "Cancel appointment", data: { confirm: "You're about to cancel your appointment on #{ format_appointment_time }. Are you sure you want to cancel this appointment? You may not be able to undo this!" } %>
+  </div>
+<% end %>
