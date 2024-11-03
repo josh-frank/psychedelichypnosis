@@ -28,6 +28,9 @@ gem 'icalendar-recurrence'
 gem 'ice_cube', '= 0.16.4'
 gem 'simple_calendar'
 
+# Validate phone numbers
+gem 'phonelib'
+
 gem 'jquery-rails'
 gem 'turbolinks'
 

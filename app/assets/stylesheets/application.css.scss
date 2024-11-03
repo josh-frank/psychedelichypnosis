@@ -18,6 +18,10 @@
   font-family: sans-serif;
 }
 
+small {
+  font-size: 11pt;
+}
+
 .flex-row {
   display: flex;
   flex-flow: row nowrap;
@@ -74,7 +78,7 @@
   font-style: italic;
 }
 
-ol li:not( :last-child ) {
+ol li:not(:last-child) {
   padding-bottom: 1rem;
 }
 
@@ -101,6 +105,10 @@ ol li:not( :last-child ) {
   display: inline-block;
 }
 
+[role="alert"] li:not(:last-child) {
+  padding-bottom: 1rem;
+}
+
 .consent {
   display: flex;
   flex-flow: row nowrap;
@@ -114,7 +122,7 @@ ol li:not( :last-child ) {
   flex-flow: row wrap;
 }
 
-.privacy-policy li:not( :last-child ) {
+.privacy-policy li:not(:last-child) {
   padding-bottom: 1em;
 }
 

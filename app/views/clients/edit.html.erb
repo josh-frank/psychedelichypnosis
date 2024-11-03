@@ -22,16 +22,20 @@
 <% end %>
 
 <h2>SMS consent</h2>
-<%= form_with scope: :client, url: "/clients/:id", method: :patch do | form | %>
-  <%= form.hidden_field :client_id, value: @client.id %>
-  <div class="consent">
-    <%= form.check_box :sms_consent, checked: @client.sms_consent %>
-    <br />
-    <%= form.label :sms_consent, "By checking this box, I consent to receiving automated text messages." %>
-  </div>
-  <p><b>You don't need to consent to automated text messages to schedule hypnosis.</b> If you leave this box unchecked, you won't get things like appointment and account reminders - but your service will be otherwise unaffected.</p>
-  <p style="font-size:11px;">Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you with unwanted sales offers. See <%= link_to 'privacy policy', privacy_path %> for more details.</p>
-  <%= form.submit "Save" %>
+<p>Automated SMS reminders improve your hypnosis experience, and are included with your purchase of credits. You don't need to consent to automated text messages to schedule hypnosis - so, if you leave this box unchecked, you won't get reminders about your account, your appointments and your hypnosis practice but, your service will be otherwise unaffected. However, <b>clients who use automated messages are more likely to successfully acheieve a psychedelic experience</b>, so turning on automated messages is recommended!</p>
+<% if @client.phone.blank? %>
+  <p role="alert">Enter a valid US phone number to activate automated SMS reminders.</p>
+<% else %>
+  <%= form_with scope: :client, url: "/clients/:id", method: :patch do | form | %>
+    <%= form.hidden_field :client_id, value: @client.id %>
+    <div class="consent">
+      <%= form.check_box :sms_consent, checked: @client.sms_consent %>
+      <br />
+      <%= form.label :sms_consent, "By checking this box, I consent to receiving automated text messages." %>
+    </div>
+    <p><small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you with unwanted sales offers. See <%= link_to 'privacy policy', privacy_path %> for more details.</small></p>
+    <%= form.submit "Save" %>
+  <% end %>
 <% end %>
 
 <h2>Change password</h2>

@@ -30,12 +30,12 @@
 
 <section>
   <h2 class='user-header'>Appointments</h2>
-  <% upcoming_appointments = @client.appointments.where( 'start > ?', DateTime.now ) %>
   <% if @client.release_signatures.empty? %>
     <li role='alert'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
-  <% elsif upcoming_appointments.empty? %>
+  <% elsif @client.upcoming_appointments.empty? %>
     <span>You have no upcoming appointments.</span>
   <% else %>
+    <p>Your next appointment is on <%= @client.upcoming_appointments.first.format_start %>.</p>
     <%= week_calendar do | date | %>
       <% @client.appointments.order( start: :asc ).each do | appointment | %>
         <% if appointment.start.to_date == date %>
@@ -45,8 +45,10 @@
     <% end %>
   <% end %>
   <% if @client.balance > 0 %>
-    <%= label_tag 'Select a hypnotist to schedule an appointment:' %>
-    <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'initialed_name' ), include_blank: true, onchange: "if ( this.value ) { window.location.href = '/appointments/new/' + this.value }" %>
+    <p>
+      <%= label_tag 'Select a hypnotist to schedule an appointment:' %>
+      <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'initialed_name' ), include_blank: true, onchange: "if ( this.value ) { window.location.href = '/appointments/new/' + this.value }" %>
+    </p>
   <% end %>
 </section>
 

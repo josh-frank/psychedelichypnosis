@@ -5,15 +5,23 @@ class Appointment < ApplicationRecord
 
   validates :start, presence: true
   validates :end, presence: true
-  validate :release_signed
-  validate :no_appointment_overlap
-  validate :hypnotist_available
+  validate :release_signed, :appointment_in_future, :no_appointment_overlap, :hypnotist_available
+
+  def format_start
+    self.start.strftime( '%A, %B %-d, %Y at %-I%P' )
+  end
 
   private
 
   def release_signed
     unless self.client && self.client.release_signatures.any?
       errors.add( :client, "must sign release" )
+    end
+  end
+
+  def appointment_in_future
+    unless self.start > Time.now
+      errors.add( :start, "must be a future date/time" )
     end
   end
 

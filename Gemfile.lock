@@ -171,6 +171,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.8)
+    phonelib (0.9.3)
     public_suffix (6.0.1)
     puma (3.12.6)
     racc (1.8.1)
@@ -296,6 +297,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.6.0)
   pg (>= 0.18, < 2.0)
+  phonelib
   puma (~> 3.11)
   rails (~> 7.0.0)
   sass-rails (~> 5.0)

@@ -8,6 +8,8 @@
 
 started_seeding = Time.now
 
+example_coordinates = { lng: -73.985240, lat: 40.765450 }
+
 josh_availability = <<~EOS
 BEGIN:VCALENDAR
 VERSION:2.0
