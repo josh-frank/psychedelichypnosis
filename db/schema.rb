@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_11_181607) do
     t.string "phone"
     t.string "email"
     t.boolean "sms_consent"
+    t.float "level", default: 1.0
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end

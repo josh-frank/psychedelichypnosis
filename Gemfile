@@ -20,6 +20,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'importmap-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
+# Validate phone numbers
+gem 'phonelib'
+# cronjob scheduler
+gem 'rufus-scheduler'
 
 gem 'dotenv-rails'
 
@@ -27,9 +31,6 @@ gem 'icalendar', '= 2.10.2'
 gem 'icalendar-recurrence'
 gem 'ice_cube', '= 0.16.4'
 gem 'simple_calendar'
-
-# Validate phone numbers
-gem 'phonelib'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -75,9 +76,10 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  # Run system tests with browsers
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # Replaces chromedriver-helper
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

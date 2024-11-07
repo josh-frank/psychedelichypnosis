@@ -1,12 +1,16 @@
 <h1>Release of Liability</h1>
 
-<p role='alert'>This page is a waiver and release of liability. It constitutes a legally binding agreement that outlines your responsibilities and governs your actions and behavior. You must carefully read this page and sign before scheduling hypnosis!</p>
+<% if current_user.release_signatures.empty? %>
+  <p role='alert'>This page is a waiver and release of liability. It constitutes a legally binding agreement that outlines your responsibilities and governs your actions and behavior. You must carefully read this page and sign before scheduling hypnosis!</p>
+<% else %>
+  <p role="alert">You signed the release form on <%= current_user.release_signatures.first.created_at.strftime( '%A, %B %-d, %Y at %-I%P' ) %>.</p>
+<% end %>
 
 <p>In consideration of my acceptance as a client and subject of hypnosis, I hereby take the following actions and make the following declarations for myself, my executors, administrators, heirs, next of kin, successors, and assigns:</p>
 
 <ol>
 
-  <li>I understand <b>hypnosis is not magic but a skill which requires practice and sincere commitment,</b> and that successfully achieving a psychedelic experience with hypnosis requires <b>non-optional individual homework and tasks, undertaken on a regular schedule,</b> without which the effectiveness of hypnosis will certainly decrease. I understand that <b>Psychedelic Hypnosis makes no guarantees of success</b> and that <b><u>all sales are final.</u></b> I understand that <b>credits are non-transferable</b> and <b><u>no refunds or exchanges will be offered</u></b>.</li>
+  <li>I understand <b>hypnosis is not magic but a skill which requires practice and sincere commitment,</b> and that successfully achieving a psychedelic experience with hypnosis requires <b>non-optional individual homework and tasks, undertaken on a regular schedule,</b> without which the effectiveness of hypnosis will certainly decrease. I understand that <b>Psychedelic Hypnosis makes no guarantees of success</b> and that <b><u>all sales are final.</u></b> I understand that <b>credits are non-transferable and have no cash value,</b> and that <b><u>no refunds or exchanges will be offered</u></b>.</li>
 
   <li>I understand that <b>hypnosis is not a substitute in any way for any kind of medical care, and on no occasion should hypnosis, or the techniques used therein, be seen as medical advice or a substitute for medical advice, diagnosis, or treatment.</b></li>
 
@@ -28,8 +32,9 @@
     <%= form.label :e_signature, 'E-Signature - Type your full legal name:' %>
     <%= form.text_field :e_signature, name: 'release_signature[e_signature]', required: true %>
   </span>
+  &nbsp;
   <span>
-    <%= form.label :date %>
+    <%= form.label :date, 'Today\'s date:' %>
     <%= form.date_field :date, name: 'release_signature[date]', required: true, placeholder: Date.today %>
   </span>
   <%= form.submit 'Sign' %>

@@ -16,27 +16,32 @@
 <br />
 
 <%= form_with scope: :appointment, url: "/appointments", method: :post, class: "new-appointment-form" do | form | %>
+
   <%= form.hidden_field :client_id, value: current_user.id %>
   <%= form.hidden_field :hypnotist_id, value: params[ :id ] %>
+
   <div>
     <%= form.label :start, "Appointment date: " %>
     <%= form.datetime_local_field :start, required: true, id: "appointment_start" %>
   </div>
+
   <div>
     <%= form.label :notes, "Notes for your hypnotist (optional):" %>
     <br />
     <%= form.text_area :notes, cols: 40 %>
   </div>
+
   <div>
     <%= form.check_box :cancellation_policy, required: true, oninvalid: "this.setCustomValidity( 'Please agree to the cancellation policy to schedule an appointment' )", oninput: "this.setCustomValidity( '' )" %>
     <span>
       <b><%= form.label :cancellation_policy, "Check to agree to the cancellation policy:" %></b> You can cancel <u>up to 24 hours before your appointment</u> by clicking on your appointment from your profile, or by contacting your hypnotist.
     </span>
   </div>
+
   <% unless current_user.sms_consent %>
     <div class="consent" style="flex-flow: column wrap">
       <div>
-        <b>Turn on automated messages (recommended but optional):</b> Activate automated messages to receive reminders about your hypnosis practice. Automated SMS reminders improve your hypnosis experience, and are included with your purchase of credits. You don't need to consent to automated text messages to schedule hypnosis, but <u>clients who use automated SMS reminders are more likely to successfully acheieve a psychedelic experience</u>.
+        <b>Turn on automated messages (recommended but optional):</b> Activate automated messages to receive reminders about your hypnosis practice. Automated SMS reminders improve your hypnosis experience, and are included with your purchase of credits. You don't need to consent to automated text messages to schedule hypnosis, but <u>clients who use automated SMS reminders are more likely to successfully achieve a psychedelic experience</u>.
       </div>
       <div>
         <%= form.label :phone, "Phone #:" %>
@@ -47,5 +52,7 @@
       <small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you with unwanted sales offers. See <%= link_to 'privacy policy', privacy_path %> for more details.</small>
     </div>
   <% end %>
+
   <%= form.submit "Schedule appointment" %>
+
 <% end %>

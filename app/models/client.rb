@@ -19,8 +19,16 @@ class Client < ApplicationRecord
     self.credits.sum( :value ) - self.appointments.size
   end
 
+  def past_appointments
+    self.appointments.where( start: ..Date.today ).order( start: :desc )
+  end
+
   def upcoming_appointments
     self.appointments.where( start: Date.today.. ).order( start: :asc )
+  end
+
+  def send_reminder?
+    self.sms_consent && [ self.phone, self.past_appointments, self.upcoming_appointments ].all?( &:present? )
   end
 
   private
@@ -33,7 +41,7 @@ class Client < ApplicationRecord
 
   def phone_required_for_sms_consent
     if self.sms_consent && self.phone.blank?
-      errors.add( :sms_consent, "requires a valid US phone number" )
+      errors.add_to_base( "SMS consent requires a valid US phone number" )
     end
   end
 

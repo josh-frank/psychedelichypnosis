@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
       "You are pure enlightenment - nothing less.",
       "You deserve nothing less than love, happiness and complete enlightenment.",
       "Your potential is limitless.",
-      "You are a vital part of the greatest story in the universe.",
+      "You are a vital part of the greatest story in history.",
       "Your enlightenment has already been achieved.",
+      "The story of your enlightenment has already been written.",
       # "",
       # "",
   ]

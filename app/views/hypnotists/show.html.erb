@@ -1,9 +1,7 @@
 <h1>Hypnotist Availability: <%= @hypnotist.full_name %></h1>
 
 <%= week_calendar do | date | %>
-  <% @availability.each do | block | %>
-    <% if block.begin.to_date == date %>
-      <div><%= "#{ block.begin.strftime( '%-I%P' ) } - #{ block.end.strftime( '%-I%P' ) }" %></div>
-    <% end %>
+  <% @availability.each do | slot | %>
+    <div><%= slot.strftime( '%-I%P' ) if slot.to_date == date %></div>
   <% end %>
 <% end %>

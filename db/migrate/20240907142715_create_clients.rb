@@ -8,6 +8,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :email
       t.boolean :sms_consent
+      t.float :level, default: 1.0
 
       t.timestamps
     end

@@ -50,6 +50,8 @@ jed_params = {
   first_name: 'Jed',
   last_name: 'Sackin',
   email: 'jsackin@gabelli.com',
+  phone: '2035243045',
+  sms_consent: false,
 }
 jed = Client.create( jed_params )
 ReleaseSignature.create( client: jed, e_signature: jed.full_name, date: Date.today )
@@ -90,6 +92,23 @@ Credit.create( client: matt, hypnotist: josh, value: 10, paid: 1000, date: Date.
   random_appointment_date = DateTime.now + rand( 60 )
   random_appointment_time = ( 11..20 ).to_a.sample
   Appointment.create( client: matt, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
+end
+
+marcia_params = {
+  username: 'msuresky',
+  password: '123456',
+  first_name: 'Marcia',
+  last_name: 'Suresky',
+  phone: '516 476 5985',
+  sms_consent: true,
+}
+marcia = Client.create( marcia_params )
+ReleaseSignature.create( client: marcia, e_signature: marcia.full_name, date: Date.today )
+Credit.create( client: marcia, hypnotist: josh, value: 10, paid: 1000, date: Date.today - rand( 60 ) )
+5.times do
+  random_appointment_date = DateTime.now + rand( 14 )
+  random_appointment_time = ( 11..20 ).to_a.sample
+  Appointment.create( client: marcia, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
 
 done_seeding = Time.now
