@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'twilio-ruby'
 
-module Twilio
+module TwilioModule
 
   @twilio_client = Twilio::REST::Client.new( ENV[ 'TWILIO_ACCOUNT_SID' ], ENV[ 'TWILIO_AUTH_TOKEN' ] )
   @twilio_phone_number = "+18337849766"
@@ -27,6 +27,5 @@ module Twilio
       error.message
     end
   end
-
 
 end

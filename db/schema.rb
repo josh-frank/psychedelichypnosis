@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_11_181607) do
     t.string "phone"
     t.string "email"
     t.text "availability"
+    t.text "bio"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end

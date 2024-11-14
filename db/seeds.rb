@@ -40,7 +40,8 @@ josh_params = {
   last_name: 'Frank',
   phone: '2014216993',
   email: 'jfrank@gabelli.com',
-  availability: josh_availability
+  availability: josh_availability,
+  bio: '<p><b>Josh Frank</b> is the Founder and Director of Psychedelic Hypnosis. After cutting his teeth hypnotizing tourists on Fifth Avenue and in Washington Square Park, today Josh presides over a thriving private hypnosis practice serving clients across five boroughs and three states. Josh is proud to serve Fairfield County clients as Connecticut Registered Hypnotist #0000635.</p>',
 }
 josh = Hypnotist.create( josh_params )
 

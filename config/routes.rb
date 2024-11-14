@@ -12,10 +12,12 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#logout', as: 'logout'
 
   ##Clients
-  get '/clients/:id', to: 'clients#show', as: 'client'
-  get '/clients/:id/edit', to: 'clients#edit', as: 'edit_client'
-  patch '/clients/:id', to: 'clients#update'
-  patch '/change_password/:id', to: 'clients#change_password', as: 'change_password'
+  scope format: false do
+    get '/profile', to: 'clients#show', as: 'client'
+    get '/profile/edit', to: 'clients#edit', as: 'edit_client'
+    patch '/profile', to: 'clients#update'
+    patch '/change_password', to: 'clients#change_password', as: 'change_password'
+  end
 
   ##Hypnotists
   get '/hypnotists/:id', to: 'hypnotists#show', as: 'hypnotist'

@@ -1,6 +1,6 @@
 <h1>Edit profile</h1>
 
-<%= form_with scope: :client, url: "/clients/:id", method: :patch, class: 'edit-profile' do | form | %>
+<%= form_with scope: :client, url: "/profile", method: :patch, class: 'edit-profile' do | form | %>
   <%= form.hidden_field :client_id, value: @client.id %>
   <div>
     <%= form.label :first_name, "First name:" %>
@@ -26,7 +26,7 @@
 <% if @client.phone.blank? %>
   <p role="alert">Enter a valid US phone number to activate automated SMS reminders.</p>
 <% else %>
-  <%= form_with scope: :client, url: "/clients/:id", method: :patch do | form | %>
+  <%= form_with scope: :client, url: "/profile", method: :patch do | form | %>
     <%= form.hidden_field :client_id, value: @client.id %>
     <div class="consent">
       <%= form.check_box :sms_consent, checked: @client.sms_consent %>
@@ -39,8 +39,7 @@
 <% end %>
 
 <h2>Change password</h2>
-
-<%= form_with scope: :client, url: "/change_password/:id", method: :patch, class: 'edit-profile' do | form | %>
+<%= form_with scope: :client, url: "/change_password", method: :patch, class: 'edit-profile' do | form | %>
   <%= form.hidden_field :client_id, value: @client.id %>
   <div>
     <%= form.label :password, "Old password:" %>

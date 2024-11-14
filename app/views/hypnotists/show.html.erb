@@ -1,7 +1,14 @@
-<h1>Hypnotist Availability: <%= @hypnotist.full_name %></h1>
+<h1>Hypnotist: <%= @hypnotist.full_name %></h1>
 
+<%= raw( @hypnotist.bio ) if @hypnotist.bio.present? %>
+
+<h2>Availability</h2>
 <%= week_calendar do | date | %>
   <% @availability.each do | slot | %>
     <div><%= slot.strftime( '%-I%P' ) if slot.to_date == date %></div>
   <% end %>
+<% end %>
+
+<% if current_user && current_user.balance > 0 %>
+  <%= link_to 'Click here', new_appointment_path( @hypnotist.id ) %> to schedule an appointment with <%= @hypnotist.initialed_name %>
 <% end %>
