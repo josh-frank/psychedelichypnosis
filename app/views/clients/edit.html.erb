@@ -1,7 +1,7 @@
 <h1>Edit profile</h1>
 
 <%= form_with scope: :client, url: "/profile", method: :patch, class: 'edit-profile' do | form | %>
-  <%= form.hidden_field :client_id, value: @client.id %>
+  <%= form.hidden_field :client_id, value: @client.id, id: nil %>
   <div>
     <%= form.label :first_name, "First name:" %>
     <%= form.text_field :first_name, placeholder: @client.first_name %>
@@ -22,36 +22,37 @@
 <% end %>
 
 <h2>SMS consent</h2>
-<p>Automated SMS reminders improve your hypnosis experience, and are included with your purchase of credits. You don't need to consent to automated text messages to schedule hypnosis - so, if you leave this box unchecked, you won't get reminders about your account, your appointments and your hypnosis practice but, your service will be otherwise unaffected. However, <b>clients who use automated messages are more likely to successfully achieve a psychedelic experience</b>, so turning on automated messages is recommended!</p>
+<p>Automated SMS reminders improve your hypnosis experience, and are included with your purchase of credits. You don't need to consent to automated text messages to schedule hypnosis - so, if you leave this box unchecked, you won't get reminders about your account, your appointments and your hypnosis practice, but your service will be otherwise unaffected. However, <b>clients who use automated messages are more likely to successfully achieve a psychedelic experience</b>, so turning on automated messages is recommended!</p>
 <% if @client.phone.blank? %>
   <p role="alert">Enter a valid US phone number to activate automated SMS reminders.</p>
 <% else %>
   <%= form_with scope: :client, url: "/profile", method: :patch do | form | %>
-    <%= form.hidden_field :client_id, value: @client.id %>
+    <%= form.hidden_field :client_id, value: @client.id, id: nil %>
     <div class="consent">
       <%= form.check_box :sms_consent, checked: @client.sms_consent %>
       <br />
       <%= form.label :sms_consent, "By checking this box, I consent to receiving automated text messages." %>
     </div>
-    <p><small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you with unwanted sales offers. See <%= link_to 'privacy policy', privacy_path %> for more details.</small></p>
+    <p><small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you. See <%= link_to 'privacy policy', privacy_path %> for more details.</small></p>
     <%= form.submit "Save" %>
   <% end %>
 <% end %>
 
 <h2>Change password</h2>
 <%= form_with scope: :client, url: "/change_password", method: :patch, class: 'edit-profile' do | form | %>
-  <%= form.hidden_field :client_id, value: @client.id %>
+  <%= form.hidden_field :client_id, value: @client.id, id: nil %>
+  <%= form.hidden_field :username, value: @client.username, id: nil %>
   <div>
     <%= form.label :password, "Old password:" %>
-    <%= form.password_field :old_password, required: true %>
+    <%= form.password_field :old_password, required: true, autocomplete: "current-password" %>
   </div>
   <div>
     <%= form.label :password, "New password:" %>
-    <%= form.password_field :password, required: true %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
   </div>
   <div>
     <%= form.label :password_confirmation, "Confirm new password:" %>
-    <%= form.password_field :password_confirmation, required: true %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
   </div>
   <%= form.submit "Update" %>
 <% end %>

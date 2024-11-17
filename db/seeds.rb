@@ -41,7 +41,7 @@ josh_params = {
   phone: '2014216993',
   email: 'jfrank@gabelli.com',
   availability: josh_availability,
-  bio: '<p><b>Josh Frank</b> is the Founder and Director of Psychedelic Hypnosis. After cutting his teeth hypnotizing tourists on Fifth Avenue and in Washington Square Park, today Josh presides over a thriving private hypnosis practice serving clients across five boroughs and three states. Josh is proud to serve Fairfield County clients as Connecticut Registered Hypnotist #0000635.</p>',
+  bio: '<p><b>Josh F.</b> is the Founder and Director of Psychedelic Hypnosis. Josh cut his teeth hypnotizing tourists on the Coney Island Boardwalk and in Washington Square Park. Today he presides over a thriving private hypnosis practice serving clients across five boroughs and three states. Josh is also proud to serve Fairfield County clients as Connecticut Registered Hypnotist #0000635.</p>',
 }
 josh = Hypnotist.create( josh_params )
 
@@ -111,6 +111,9 @@ Credit.create( client: marcia, hypnotist: josh, value: 10, paid: 1000, date: Dat
   random_appointment_time = ( 11..20 ).to_a.sample
   Appointment.create( client: marcia, hypnotist: josh, start: random_appointment_date.change( { hour: random_appointment_time, min: 0, sec: 0 } ), end: random_appointment_date.change( { hour: random_appointment_time + 1, min: 0, sec: 0 } ) )
 end
+
+david = Client.create( username: 'dfrank', password: '123456', first_name: 'David', last_name: 'Frank', phone: '2014216995' )
+Credit.create( hypnotist: josh, client: david, value: 2, paid: 100, date: Date.today )
 
 done_seeding = Time.now
 

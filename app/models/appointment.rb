@@ -11,6 +11,10 @@ class Appointment < ApplicationRecord
     self.start.strftime( '%A, %B %-d, %Y at %-I%P' )
   end
 
+  def format_start_time
+    self.start.strftime( '%-I%P' )
+  end
+
   private
 
   def release_signed

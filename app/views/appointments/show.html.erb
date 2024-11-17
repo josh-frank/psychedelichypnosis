@@ -1,9 +1,13 @@
 <h1>Appointment details</h1>
 
-<h2>You have an appointment on <%= @appointment.format_start %>.</h2>
-<% if @appointment.location.present? %>
+<h2>You have <%= @appointment.virtual ? 'a virtual appointment' : 'an appointment' %> on <%= @appointment.format_start %>.</h2>
+<% if @appointment.virtual && @appointment.link.present? %>
+  <%= link_to 'Click here', @appointment.link, target: "_blank" %> to start your virtual appointment.
+<% elsif @appointment.virtual && @appointment.link.blank? %>
+  <p><em>Your hypnotist will update this page with a link to your virtual appointment in a teleconferencing app shortly.</em></p>
+<% elsif @appointment.location.present? %>
   <p>Location: <%= @appointment.location %></p>
-<% else %>
+<% elsif @appointment.location.blank? %>
   <p><em>Your hypnotist will update this page with your appointment location shortly.</em></p>
 <% end %>
 
@@ -13,7 +17,7 @@
 
 <% unless @appointment.start < 24.hours.from_now %>
   <%= form_with scope: :appointment, url: cancel_appointment_path, method: :delete, class: "consent" do | form | %>
-    <%= form.hidden_field :id, value: params[ :id ] %>
+    <%= form.hidden_field :id, value: params[ :id ], id: nil %>
     <div>
       <h3>Cancel this appointment</h3>
       <p>Click the button below to cancel this appointment. Canceling makes this time slot available for other clients - so, <b>this appointment time may not be available if/when you change your mind!</b></p>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg id='root' width='100%' height='100%' viewBox='-800 -800 1600 1600' preserveAspectRatio='xMidYMid slice' zoomAndPan='disable' contentScriptType='text/ecmascript' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<!--
+
+Copyright 2008-2014 Chris W. Johnson. <http://chriswjohnson.blogspot.com/>
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see
+<http://www.gnu.org/licenses/>.
+
+-->
+
+<title>Rotating Spiral by Chris W. Johnson</title>
+<desc>Rotating Spiral, version 1.0.5 of 15-Nov-2014,
+Copyright 2008-2014 Chris W. Johnson. &lt;http://chriswjohnson.blogspot.com/&gt;</desc>
+
+<defs>
+<style type='text/css'>/* <![CDATA[ */
+
+svg {
+fill: white;
+/*  image-rendering: optimizeQuality;  Firefox seems to run a little more smoothly without this. */
+}
+
+g#spiral path {
+stroke: none;
+stroke-width: 0px;
+fill: black;
+}
+
+/* ]]> */</style>
+</defs>
+
+<g id='spiral'></g>
+
+<script type='text/ecmascript'>/* <![CDATA[ */
+
+
+function SpiralTest(BBox, SegmentsPerRevolution) {
+const MaxRadius         = Math.sqrt(BBox.width() * BBox.width() + BBox.height() * BBox.height());
+const DegreesPerSegment = 360 / SegmentsPerRevolution;
+
+//  const SpiralFunction1   = new LogarithmicSpiral(1,   1.2, DegreesPerSegment);
+//  const SpiralFunction2   = new LogarithmicSpiral(1.7, 1.2, DegreesPerSegment);
+
+//  const SpiralFunction1   = new LogarithmicSpiral(1,   1.15, DegreesPerSegment);
+//  const SpiralFunction2   = new LogarithmicSpiral(1.9, 1.15, DegreesPerSegment);
+
+const SpiralFunction1   = new LogarithmicSpiral(1,    1.15, DegreesPerSegment);
+const SpiralFunction2   = new LogarithmicSpiral(1.59, 1.15, DegreesPerSegment);
+
+//  const SpiralFunction1   = new LogarithmicSpiral(1,    1.1, DegreesPerSegment);
+//  const SpiralFunction2   = new LogarithmicSpiral(1.35, 1.1, DegreesPerSegment);
+
+//  const SpiralFunction1   = new LogarithmicSpiral(1,    1.05, DegreesPerSegment);
+//  const SpiralFunction2   = new LogarithmicSpiral(1.18, 1.05, DegreesPerSegment);
+
+var Points1      = [];
+var Points1Index = 0;
+var Points2      = [];
+var Points2Index = 0;
+
+while (SpiralFunction1.getRadius() <= MaxRadius && SpiralFunction2.getRadius() <= MaxRadius) {
+
+Points1[Points1Index++] = new RPoint(SpiralFunction1.getX(), SpiralFunction1.getY(), SpiralFunction1.getRadius());
+Points2[Points2Index++] = new RPoint(SpiralFunction2.getX(), SpiralFunction2.getY(), SpiralFunction2.getRadius());
+
+SpiralFunction1.advance();
+SpiralFunction2.advance();
+}
+
+const g         = document.getElementById('spiral');
+var   PrevPoint = null;
+var   CurPoint  = Points1[0];
+var   d         = "M" + CurPoint.X + "," + CurPoint.Y;
+var   Radius;
+
+for (Points1Index = 1; Points1Index < Points1.length; Points1Index++) {
+
+PrevPoint = CurPoint;
+CurPoint  = Points1[Points1Index];
+Radius    = (PrevPoint.R + CurPoint.R) / 2;
+
+d += "A" + Radius + "," + Radius + " 0 0,1 " + CurPoint.X + "," + CurPoint.Y;
+}
+
+PrevPoint = null;
+CurPoint  = Points2[Points2.length - 1];
+
+d += "L" + CurPoint.X + "," + CurPoint.Y;
+
+for (Points2Index = Points2.length - 1; --Points2Index >= 0; ) {
+
+PrevPoint = CurPoint;
+CurPoint  = Points2[Points2Index];
+Radius    = (PrevPoint.R + CurPoint.R) / 2;
+
+d += "A" + Radius + "," + Radius + " 0 0,0 " + CurPoint.X + "," + CurPoint.Y;
+}
+
+const Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+Path.setAttribute('d', d + "z");
+g.appendChild(Path);
+}
+
+
+function LogarithmicSpiral(a, b, DegreesIncrement) {
+this.init(a, b, DegreesIncrement);
+}
+
+LogarithmicSpiral.prototype = {
+
+init : function(a, b, DegreesIncrement) {
+
+this.a = a;
+this.b = b;
+this.DegreesIncrement = DegreesIncrement;
+
+this.r     = 0;
+this.θ     = 0;
+this.Nextθ = 0;
+},
+
+getAngle : function() {
+return this.θ;
+},
+
+setAngle : function(Newθ) {
+this.θ     = Newθ;
+this.Nextθ = Newθ;
+},
+
+getAngleRadians : function() {
+return toRadians(this.θ);
+},
+
+getRadius : function() {
+return this.r;
+},
+
+getX : function() {
+return this.r * Math.cos(toRadians(this.θ));
+},
+
+getY : function() {
+return this.r * Math.sin(toRadians(this.θ));
+},
+
+advance : function() {
+
+this.θ     = this.Nextθ;
+this.r     = this.a * Math.pow(this.b, toRadians(this.θ));
+this.Nextθ = this.θ + this.DegreesIncrement;
+}
+};
+
+
+function RPoint(X, Y, R) {
+this.X = X;
+this.Y = Y;
+this.R = R;
+}
+
+
+function Rectangle(Top, Left, Bottom, Right) {
+this.Top    = Top;
+this.Left   = Left;
+this.Bottom = Bottom;
+this.Right  = Right;
+}
+
+Rectangle.prototype = {
+
+width : function() {
+return this.Right - this.Left;
+},
+
+height : function() {
+return this.Bottom - this.Top;
+},
+
+centerX : function() {
+return this.Left + this.width() / 2;
+},
+
+centerY : function() {
+return this.Top + this.height() / 2;
+},
+
+includes : function(X, Y) {
+return X >= this.Left && X < this.Right && Y >= this.Top && Y < this.Bottom;
+}
+};
+
+
+function toRadians(Degrees) {
+return Degrees * (Math.PI / 180.0);
+}
+
+
+function toDegrees(Radians) {
+return Radians * (180.0 / Math.PI);
+}
+
+
+function Rotator() {
+
+const TimeIncrementMilliseconds = 16;
+const RotationIncrementDegrees  = 5;
+const RotationPerMillisecond    = RotationIncrementDegrees / TimeIncrementMilliseconds;
+const Canvas     = document.getElementById("root");
+const Spiral     = document.getElementById("spiral");
+var   Angle      = 0;
+var   Rotating   = false;
+var   StartCount = 0;
+var   BaseMs;
+var   IntervalID;
+
+Canvas.addEventListener("click", toggle, false);
+
+this.toggle = toggle;
+this.start  = start;
+this.stop   = stop;
+this.rotate = rotate;
+
+function toggle() {
+
+if (Rotating)
+stop();
+else
+start();
+}
+
+function start() {
+
+StartCount++;
+BaseMs     = Date.now();
+Rotating   = true;
+IntervalID = window.setInterval(function() { TheRotator.rotate(); }, TimeIncrementMilliseconds );
+}
+
+function stop() {
+
+window.clearInterval(IntervalID);
+Rotating = false;
+}
+
+function rotate() {
+
+if (!Rotating)
+return;
+
+const NowMs    = Date.now();
+const Rotation = (NowMs - BaseMs) * RotationPerMillisecond;
+
+BaseMs = NowMs;
+
+if (StartCount % 2 != 0)
+Angle = (Angle - Rotation) % 360;
+else
+Angle = (Angle + Rotation) % 360;
+
+Spiral.setAttribute("transform", "rotate(" + Angle + ")");
+}
+}
+
+function toggleFullScreen() {
+
+//  From <https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode>:
+
+if (!document.fullscreenElement &&    // alternative standard method
+!document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+
+if (document.documentElement.requestFullscreen) {
+document.documentElement.requestFullscreen();
+} else if (document.documentElement.msRequestFullscreen) {
+document.documentElement.msRequestFullscreen();
+} else if (document.documentElement.mozRequestFullScreen) {
+document.documentElement.mozRequestFullScreen();
+} else if (document.documentElement.webkitRequestFullscreen) {
+document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+}
+
+} else {
+
+if (document.exitFullscreen) {
+document.exitFullscreen();
+} else if (document.msExitFullscreen) {
+document.msExitFullscreen();
+} else if (document.mozCancelFullScreen) {
+document.mozCancelFullScreen();
+} else if (document.webkitExitFullscreen) {
+document.webkitExitFullscreen();
+}
+}
+}
+
+
+document.addEventListener("keydown", function (Event) {
+if (Event.keyCode == 13 || Event.keyCode == 32) //  return or space
+toggleFullScreen();
+});
+
+
+const TheSpiral  = new SpiralTest(new Rectangle(-800, -800, 800, 800), 36);
+const TheRotator = new Rotator();
+
+TheRotator.start();
+
+
+/* ]]> */</script>
+
+
+</svg>

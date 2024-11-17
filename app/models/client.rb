@@ -19,6 +19,10 @@ class Client < ApplicationRecord
     self.credits.sum( :value ) - self.appointments.size
   end
 
+  def signed_release?
+    self.release_signatures.present?
+  end
+
   def past_appointments
     self.appointments.where( start: ..Date.today ).order( start: :desc )
   end

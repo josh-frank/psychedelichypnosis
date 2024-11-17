@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_11_181607) do
     t.decimal "lng", precision: 10, scale: 6
     t.decimal "lat", precision: 10, scale: 6
     t.text "notes"
+    t.boolean "virtual"
+    t.string "link"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["client_id"], name: "index_appointments_on_client_id"

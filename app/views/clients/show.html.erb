@@ -35,7 +35,7 @@
 <section>
   <h2 class='user-header'>Appointments</h2>
   <% if @client.release_signatures.empty? %>
-    <li role='alert'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</li>
+    <p role='alert'>You haven't signed the release form yet, so you can't schedule appointments. <%= link_to "Click here", release_form_path %> to sign the release form.</p>
   <% elsif @client.upcoming_appointments.empty? %>
     <span>You have no upcoming appointments.</span>
   <% else %>
@@ -48,7 +48,7 @@
       <% end %>
     <% end %>
   <% end %>
-  <% if @client.balance > 0 %>
+  <% if @client.signed_release? && @client.balance > 0 %>
     <p>
       <%= label_tag 'Select a hypnotist to schedule an appointment:' %>
       <%= select_tag :hypnotist_id, options_from_collection_for_select( @hypnotists, 'id', 'initialed_name' ), include_blank: true, onchange: "if ( this.value ) { window.location.href = '/appointments/new/' + this.value + '?start_date=' + formatTodaysDate }" %>

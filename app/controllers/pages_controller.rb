@@ -11,4 +11,8 @@ class PagesController < ApplicationController
   def release
   end
 
+  def spiral
+    render layout: false
+  end
+
 end

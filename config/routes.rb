@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'pages#home', as: 'home'
   get '/privacy', to: 'pages#privacy', as: 'privacy'
+  get '/spiral', to: 'pages#spiral', as: 'spiral'
 
   ##Twilio
   post '/sms', to: 'twilio#respond'

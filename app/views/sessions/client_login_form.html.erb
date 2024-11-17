@@ -2,15 +2,15 @@
     <%= form_tag "/login", method: "post" do %>
         <div class="input-group-prepend">
             <%= label_tag :username, "Username: ", class: 'input-group-text' %>
-            <%= text_field_tag :username, '', class: 'form-control' %>
+            <%= text_field_tag :username, '', class: 'form-control', autocomplete: 'username' %>
         </div>
         <div class="input-group-prepend">
             <%= label_tag :password, "Password: ", class: 'input-group-text' %>
-            <%= password_field_tag :password, '', class: 'form-control' %>
+            <%= password_field_tag :password, '', class: 'form-control', autocomplete: 'current-password' %>
         </div>
         <!-- <div class="input-group-prepend">
             <%= label_tag :password_confirmation, "Confirm Password: ", class: 'input-group-text' %>
-            <%= password_field_tag :password_confirmation, '', class: 'form-control' %>
+            <%= password_field_tag :password_confirmation, '', class: 'form-control', autocomplete: 'current-password' %>
         </div> -->
         <%= submit_tag "Log in", class: 'btn-primary' %>
     <% end %>

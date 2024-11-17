@@ -17,8 +17,8 @@
 
 <%= form_with scope: :appointment, url: "/appointments", method: :post, class: "new-appointment-form" do | form | %>
 
-  <%= form.hidden_field :client_id, value: current_user.id %>
-  <%= form.hidden_field :hypnotist_id, value: params[ :id ] %>
+  <%= form.hidden_field :client_id, value: current_user.id, id: nil %>
+  <%= form.hidden_field :hypnotist_id, value: params[ :id ], id: nil %>
 
   <div>
     <%= form.label :start, "Appointment date: " %>
@@ -32,9 +32,14 @@
   </div>
 
   <div>
+    <b><%= form.label :virtual, "In-person or virtual?" %></b>
+    <%= form.select :virtual, [ [ "In-person", false ], [ "Virtual", true ] ] %>
+  </div>
+
+  <div>
     <%= form.check_box :cancellation_policy, required: true, oninvalid: "this.setCustomValidity( 'Please agree to the cancellation policy to schedule an appointment' )", oninput: "this.setCustomValidity( '' )" %>
     <span>
-      <b><%= form.label :cancellation_policy, "Check to agree to the cancellation policy:" %></b> You can cancel <u>up to 24 hours before your appointment</u> by clicking on your appointment from your profile, or by contacting your hypnotist.
+      <b><%= form.label :cancellation_policy, "Check here to agree to the cancellation policy:" %></b> You can cancel <u>up to 24 hours before your appointment</u> by clicking on your appointment from your profile, or by contacting your hypnotist.
     </span>
   </div>
 
@@ -49,10 +54,11 @@
         <%= form.check_box :sms_consent %>
         <%= form.label :sms_consent, "By checking this box, I consent to receiving automated text messages." %>
       </div>
-      <small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you with unwanted sales offers. See <%= link_to 'privacy policy', privacy_path %> for more details.</small>
+      <small>Message and data rates may apply. Reply STOP to opt out or HELP for more information at any time. Psychedelic Hypnosis will never sell your number or spam you. See <%= link_to 'privacy policy', privacy_path %> for more details.</small>
     </div>
   <% end %>
 
+  <br />
   <%= form.submit "Schedule appointment" %>
 
 <% end %>

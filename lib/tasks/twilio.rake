@@ -3,9 +3,11 @@ require "#{ Rails.root }/config/initializers/twilio"
 namespace :twilio do
 
   desc 'Lists Twilio/SMS message history'
-  task :message_history do
+  task :history do
     include TwilioModule
-    TwilioModule.client.api.v2010.messages.list( limit: 20 ).each{ | message | puts message.body }
+    TwilioModule.client.api.v2010.messages.list( limit: 20 ).each do | message |
+      puts message
+    end
   end
 
   # desc 'Sends a practice reminder to all consenting clients with upcoming appointments via Twilio/SMS'

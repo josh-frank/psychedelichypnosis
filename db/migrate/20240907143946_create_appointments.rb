@@ -9,6 +9,8 @@ class CreateAppointments < ActiveRecord::Migration[5.2]
       t.decimal :lng, precision: 10, scale: 6
       t.decimal :lat, precision: 10, scale: 6
       t.text :notes
+      t.boolean :virtual
+      t.string :link
 
       t.timestamps
     end

@@ -6,7 +6,7 @@ class TwilioController < ApplicationController
   skip_before_action :authorize, only: [ :respond ]
 
   def respond
-    TwilioModule.send( params[ "From" ], "Hello! Thanks for contacting Psychedelic Hypnosis! A hypnotist will respond to you shortly. Reply STOP or HELP at any time. Remember: #{ @@affirmations.sample.downcase }" )
+    TwilioModule.send( params[ "From" ], "Hello! Thanks for contacting Psychedelic Hypnosis! A hypnotist will respond to you shortly. Remember: #{ @@affirmations.sample.downcase } (Reply STOP or HELP at any time)" )
     TwilioModule.send( '+12014216993', "From: #{ params[ "From" ] }\nContent: #{ params[ "Body" ] }" )
     render json: { from: params[ "From" ], body: params[ "Body" ] }
   end
