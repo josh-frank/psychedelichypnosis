@@ -2,6 +2,7 @@
 <html lang="en-us">
 
   <head>
+
     <title>Psychedelic Hypnosis</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +11,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
+
+    <script type="module">
+      document.addEventListener( "DOMContentLoaded", () => {
+        console.log( '%c"Every day, in every way, you\'re getting better and better"', 'color: red; font-size: 50px;' );
+        console.log( '%c- ÉMILE COUÉ', 'font-size: 20px;' );
+      } );
+    </script>
+
   </head>
 
   <body>
